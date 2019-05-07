@@ -36,8 +36,8 @@ jobs:
 
             # run tests!
             - run:
-              name: Run tests with JUnit as reporter
-              command: yarn jest --ci --runInBand --reporters=default --reporters=jest-junit
-              environment:
-                  JEST_JUNIT_OUTPUT: 'reports/junit/js-test-results.xml'
+                  name: Run tests with JUnit as reporter
+                  command: yarn jest --ci --runInBand --reporters=default --reporters=jest-junit
+                  environment:
+                      JEST_JUNIT_OUTPUT: 'reports/junit/js-test-results.xml'
             - run: yarn lint
