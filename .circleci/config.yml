@@ -6,14 +6,7 @@ version: 2
 jobs:
     build:
         docker:
-            # specify the version you desire here
             - image: circleci/node:10
-
-            # Specify service dependencies here if necessary
-            # CircleCI maintains a library of pre-built images
-            # documented at https://circleci.com/docs/2.0/circleci-images/
-            # - image: circleci/mongo:3.4.4
-
         steps:
             - checkout
 
@@ -24,7 +17,9 @@ jobs:
                       # fallback to using the latest cache if no exact match is found
                       - v1-dependencies-
 
-            - run: yarn install --peer
+            - run:
+                  name: Install yarn dependencies
+                  command: yarn install
             - run:
                   name: Install JUnit coverage reporter
                   command: yarn add --dev jest-junit
@@ -34,15 +29,20 @@ jobs:
                       - node_modules
                   key: v1-dependencies-{{ checksum "package.json" }}
             - run:
-                  name: ESLint
-                  command: yarn lint
-            - run:
-                  name: Build library
+                  name: Build application
                   command:
-                      yarn tsc
-                      # run tests!
+                      yarn build
             - run:
-                  name: Run tests with JUnit as reporter
-                  command: yarn test
+                  name: ESLint
+                  command: |
+                      mkdir -p ~/reports
+                      yarn lint --format junit --output-file ~/reports/eslint.xml
+            - run:
+                  name: Run tests
+                  command: yarn test --coverage --collectCoverage=true --runInBand --reporters=default --reporters=jest-junit
                   environment:
                       JEST_JUNIT_OUTPUT: 'reports/junit/js-test-results.xml'
+            - store_test_results:
+                path: reports
+            - store_artifacts:
+                path: coverage
