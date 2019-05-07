@@ -1,36 +1,41 @@
 {
-  "name": "@jetbridge/frontend-core",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@types/jest": "24.0.12",
-    "@types/node": "12.0.0",
-    "react-scripts": "3.0.0",
-    "typescript": "3.4.5"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "peerDependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-  }
+    "name": "@jetbridge/frontend-core",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@types/jest": "24.0.12",
+        "@types/node": "12.0.0",
+        "react-scripts": "3.0.0",
+        "typescript": "3.4.5"
+    },
+    "scripts": {
+        "test-ci": "CI=1 react-scripts test",
+        "test": "react-scripts test",
+        "build": "tsc",
+        "start": "rm -rf dist && tsc -w",
+        "storybook": "start-storybook -p 6006",
+        "build-storybook": "build-storybook",
+        "lint": "eslint src/**/*.ts src/**/*.tsx",
+        "fix": "eslint --fix src/**/*.ts src/**/*.tsx",
+        "postinstall": "tsc"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "peerDependencies": {
+        "react": "^16.8.6",
+        "react-dom": "^16.8.6"
+    }
 }
