@@ -1,5 +1,5 @@
 {
-  "name": "frontend-core",
+  "name": "@jetbridge/frontend-core",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
