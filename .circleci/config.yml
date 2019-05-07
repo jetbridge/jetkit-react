@@ -33,11 +33,16 @@ jobs:
                   paths:
                       - node_modules
                   key: v1-dependencies-{{ checksum "package.json" }}
-
-            # run tests!
+            - run:
+                  name: ESLint
+                  command: yarn lint
+            - run:
+                  name: Build library
+                  command:
+                      yarn tsc
+                      # run tests!
             - run:
                   name: Run tests with JUnit as reporter
                   command: yarn test
                   environment:
                       JEST_JUNIT_OUTPUT: 'reports/junit/js-test-results.xml'
-            - run: yarn lint

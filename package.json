@@ -2,8 +2,10 @@
     "name": "@jetbridge/frontend-core",
     "version": "0.1.0",
     "private": true,
+    "module": "dist/index.js",
+    "types": "dist/index.d.ts",
     "dependencies": {
-        "@types/jest": "24.0.12",
+        "@types/jest": "^24.0.12",
         "@types/node": "12.0.0",
         "@types/react": "^16.8.16",
         "@types/react-dom": "^16.8.4",
@@ -39,6 +41,19 @@
         ]
     },
     "devDependencies": {
-        "jest-junit": "^6.4.0"
+        "@storybook/addon-info": "^5.0.11",
+        "@types/storybook__react": "^4.0.1",
+        "awesome-typescript-loader": "^5.2.1",
+        "jest": "^24.8.0",
+        "jest-junit": "^6.4.0",
+        "react-docgen-typescript-loader": "^3.1.0",
+        "storybook": "^1.0.0",
+        "ts-jest": "^24.0.2",
+        "@storybook/addon-actions": "^5.0.5",
+        "@storybook/addon-centered": "^5.0.5",
+        "@storybook/addon-links": "^5.0.5",
+        "@storybook/addons": "^5.0.5",
+        "@storybook/core": "^5.0.5",
+        "@storybook/react": "^5.0.5"
     }
 }
