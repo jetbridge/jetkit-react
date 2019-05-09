@@ -10,13 +10,41 @@ import InputLabel from '@material-ui/core/InputLabel'
 import Visibility from '@material-ui/icons/Visibility'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import FormControl from '@material-ui/core/FormControl'
+import { createStyles, withStyles, WithStyles } from '@material-ui/core/styles'
+import { ThemeStyle } from '@material-ui/core/styles/createTypography'
 
-interface ILoginScreenClasses {
-    root: string
-    inputWrapperStyle: string
-}
-
-interface ILoginScreenProps {
+const styles = createStyles({
+    root: {
+        width: 450,
+    },
+    inputWrapperStyle: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    title: {},
+    innerWrapper: {
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    submitButton: {
+        width: '100%',
+        marginTop: 30,
+    },
+    inputField: {
+        width: '100%',
+    },
+    titleAndInputWrapper: {
+        padding: '50px 60px',
+    },
+    passwordInputField: {
+        marginTop: 40,
+    },
+    emailInputField: {
+        marginTop: 60,
+    },
+})
+interface ILoginScreenProps extends WithStyles<typeof styles> {
     title?: string
     titleStyle?: React.CSSProperties
     showTitle?: boolean
@@ -31,8 +59,8 @@ interface ILoginScreenProps {
     emailHelperText?: string
     passwordError?: boolean
     passwordHelperText?: string
-    classes?: ILoginScreenClasses
     submitButtonProps?: ButtonProps
+    titleVariant?: ThemeStyle
 }
 
 interface LoginScreenState {
@@ -43,15 +71,18 @@ interface LoginScreenState {
 
 const LoginScreen: React.FunctionComponent<ILoginScreenProps> = ({
     title = 'Login',
-    titleStyle,
-    showTitle,
+    showTitle = true,
     emailTextFieldProps,
     passwordTextFieldProps,
     emailLabel = 'Email',
     userEmail = '',
     onInputChange,
+    submitButtonProps = {
+        variant: 'contained',
+        color: 'primary',
+    },
     classes,
-    submitButtonProps,
+    titleVariant = 'h3',
 }) => {
     const [inputFields, setInputValues] = React.useState<LoginScreenState>({
         email: userEmail,
@@ -59,11 +90,11 @@ const LoginScreen: React.FunctionComponent<ILoginScreenProps> = ({
         showPassword: false,
     })
 
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        if (!event.target) return
+    const handleInputChange = (key: 'email' | 'password') => (event: React.ChangeEvent<HTMLInputElement>) => {
+        event.persist() // to avoid React optimizations which can make event.target = null
         setInputValues(prevState => ({
             ...prevState,
-            [event.target.name]: event.target.value,
+            [key]: event.target.value,
         }))
         if (onInputChange) onInputChange(event)
     }
@@ -73,44 +104,51 @@ const LoginScreen: React.FunctionComponent<ILoginScreenProps> = ({
     }
 
     return (
-        <Card className={classes && classes.root}>
-            {showTitle && <Typography style={titleStyle}>{title}</Typography>}
-            <div className={classes && classes.inputWrapperStyle}>
-                <form>
-                    <TextField
-                        type="email"
-                        autoComplete="email"
-                        name="email"
-                        label={emailLabel}
-                        {...emailTextFieldProps}
-                        value={inputFields.email}
-                        onChange={handleInputChange}
-                    />
-                    <FormControl>
-                        <InputLabel htmlFor="adornment-password">Password</InputLabel>
-                        <Input
-                            type={inputFields.showPassword ? 'text' : 'password'}
-                            name="password"
-                            autoComplete="password"
-                            {...passwordTextFieldProps}
-                            onChange={handleInputChange}
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="Toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                    >
-                                        {inputFields.showPassword ? <Visibility /> : <VisibilityOff />}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
+        <Card className={classes.root}>
+            <div className={classes.innerWrapper}>
+                <div className={classes.titleAndInputWrapper}>
+                    {showTitle && (
+                        <Typography variant={titleVariant} className={classes.title}>
+                            {title}
+                        </Typography>
+                    )}
+                    <form className={classes.inputWrapperStyle}>
+                        <TextField
+                            type="email"
+                            autoComplete="email"
+                            className={`${classes.inputField} ${classes.emailInputField}`}
+                            label={emailLabel}
+                            {...emailTextFieldProps}
+                            value={inputFields.email}
+                            onChange={handleInputChange('email')}
                         />
-                    </FormControl>
-                </form>
+                        <FormControl className={`${classes.inputField} ${classes.passwordInputField}`}>
+                            <InputLabel htmlFor="adornment-password">Password</InputLabel>
+                            <Input
+                                type={inputFields.showPassword ? 'text' : 'password'}
+                                autoComplete="password"
+                                {...passwordTextFieldProps}
+                                onChange={handleInputChange('password')}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="Toggle password visibility"
+                                            onClick={handleClickShowPassword}
+                                        >
+                                            {inputFields.showPassword ? <Visibility /> : <VisibilityOff />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                            />
+                        </FormControl>
+                    </form>
+                </div>
             </div>
-            <Button {...submitButtonProps}>Submit</Button>
+            <Button className={classes.submitButton} {...submitButtonProps}>
+                Submit
+            </Button>
         </Card>
     )
 }
 
-export default LoginScreen
+export default withStyles(styles)(LoginScreen)
