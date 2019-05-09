@@ -151,4 +151,4 @@ const LoginScreen: React.FunctionComponent<ILoginScreenProps> = ({
     )
 }
 
-export default LoginScreen
+export default withStyles(styles)(LoginScreen)
