@@ -5,7 +5,10 @@
     "module": "dist/index.js",
     "types": "dist/index.d.ts",
     "dependencies": {
+        "@material-ui/core": "^3.9.3",
+        "@material-ui/icons": "^3.0.2",
         "@types/jest": "^24.0.12",
+        "@types/material-ui": "^0.21.6",
         "@types/node": "12.0.0",
         "@types/react": "^16.8.16",
         "@types/react-dom": "^16.8.4",
@@ -59,6 +62,7 @@
         "awesome-typescript-loader": "^5.2.1",
         "jest-junit": "^6.4.0",
         "react-docgen-typescript-loader": "^3.1.0",
+        "react-docgen-typescript-webpack-plugin": "^1.1.0",
         "storybook": "^1.0.0",
         "ts-jest": "^24.0.2"
     }
