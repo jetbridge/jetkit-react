@@ -1,22 +1,12 @@
 const path = require('path')
-module.exports = ({ config }) => ({
-    ...config,
-    module: {
-        ...config.module,
-        rules: [
-            ...config.module.rules,
-            {
-                test: /\.(ts|tsx)$/,
-                use: [
-                    {
-                        loader: require.resolve('awesome-typescript-loader'),
-                    },
-                ],
-            },
-        ],
-    },
-    resolve: {
-        ...config.resolve,
-        extensions: ['.ts', '.tsx', ...config.resolve.extensions],
-    },
-})
+const TSDocgenPlugin = require('react-docgen-typescript-webpack-plugin')
+module.exports = ({ config }) => {
+    config.module.rules.push({
+        test: /\.(ts|tsx)$/,
+        loader: require.resolve('awesome-typescript-loader'),
+        options: { configFileName: path.resolve(__dirname, './tsconfig.json') }, // << added
+    })
+    config.plugins.push(new TSDocgenPlugin()) // optional
+    config.resolve.extensions.push('.ts', '.tsx')
+    return config
+}
