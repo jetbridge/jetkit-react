@@ -61,6 +61,7 @@ interface ILoginScreenProps extends WithStyles<typeof styles> {
     passwordHelperText?: string
     submitButtonProps?: ButtonProps
     titleVariant?: ThemeStyle
+    onSubmitClick(): void
 }
 
 interface LoginScreenState {
@@ -80,6 +81,7 @@ const LoginScreen: React.FunctionComponent<ILoginScreenProps> = ({
     submitButtonProps,
     classes,
     titleVariant = 'h3',
+    onSubmitClick,
 }) => {
     const [inputFields, setInputValues] = React.useState({
         email: userEmail,
@@ -141,7 +143,7 @@ const LoginScreen: React.FunctionComponent<ILoginScreenProps> = ({
                     </form>
                 </div>
             </div>
-            <Button className={classes.submitButton} {...submitButtonProps}>
+            <Button className={classes.submitButton} onClick={onSubmitClick} {...submitButtonProps}>
                 Submit
             </Button>
         </Card>

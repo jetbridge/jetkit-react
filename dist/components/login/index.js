@@ -42,7 +42,7 @@ const styles = createStyles({
         marginTop: 60,
     },
 });
-const LoginScreen = ({ title = 'Login', showTitle = true, emailTextFieldProps, passwordTextFieldProps, emailLabel = 'Email', userEmail = '', onInputChange, submitButtonProps, classes, titleVariant = 'h3', }) => {
+const LoginScreen = ({ title = 'Login', showTitle = true, emailTextFieldProps, passwordTextFieldProps, emailLabel = 'Email', userEmail = '', onInputChange, submitButtonProps, classes, titleVariant = 'h3', onSubmitClick, }) => {
     const [inputFields, setInputValues] = React.useState({
         email: userEmail,
         password: '',
@@ -67,7 +67,7 @@ const LoginScreen = ({ title = 'Login', showTitle = true, emailTextFieldProps, p
                         React.createElement(InputLabel, { htmlFor: "adornment-password" }, "Password"),
                         React.createElement(Input, Object.assign({ type: inputFields.showPassword ? 'text' : 'password', autoComplete: "password" }, passwordTextFieldProps, { onChange: handleInputChange('password'), endAdornment: React.createElement(InputAdornment, { position: "end" },
                                 React.createElement(IconButton, { "aria-label": "Toggle password visibility", onClick: handleClickShowPassword }, inputFields.showPassword ? React.createElement(Visibility, null) : React.createElement(VisibilityOff, null))) })))))),
-        React.createElement(Button, Object.assign({ className: classes.submitButton }, submitButtonProps), "Submit")));
+        React.createElement(Button, Object.assign({ className: classes.submitButton, onClick: onSubmitClick }, submitButtonProps), "Submit")));
 };
 export default withStyles(styles)(LoginScreen);
 //# sourceMappingURL=index.js.map

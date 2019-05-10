@@ -22,6 +22,7 @@ interface ILoginScreenProps extends WithStyles<typeof styles> {
     passwordHelperText?: string;
     submitButtonProps?: ButtonProps;
     titleVariant?: ThemeStyle;
+    onSubmitClick(): void;
 }
-declare const _default: React.ComponentType<Pick<React.PropsWithChildren<ILoginScreenProps>, "title" | "children" | "showTitle" | "emailTextFieldProps" | "passwordTextFieldProps" | "emailLabel" | "userEmail" | "onInputChange" | "submitButtonProps" | "titleVariant" | "titleStyle" | "inputFieldWrapperStyle" | "passwordLabel" | "emailError" | "emailHelperText" | "passwordError" | "passwordHelperText"> & import("@material-ui/core/styles").StyledComponentProps<"title" | "root" | "inputWrapperStyle" | "innerWrapper" | "submitButton" | "inputField" | "titleAndInputWrapper" | "passwordInputField" | "emailInputField">>;
+declare const _default: React.ComponentType<Pick<React.PropsWithChildren<ILoginScreenProps>, "title" | "children" | "showTitle" | "emailTextFieldProps" | "passwordTextFieldProps" | "emailLabel" | "userEmail" | "onInputChange" | "submitButtonProps" | "titleVariant" | "onSubmitClick" | "titleStyle" | "inputFieldWrapperStyle" | "passwordLabel" | "emailError" | "emailHelperText" | "passwordError" | "passwordHelperText"> & import("@material-ui/core/styles").StyledComponentProps<"title" | "root" | "inputWrapperStyle" | "innerWrapper" | "submitButton" | "inputField" | "titleAndInputWrapper" | "passwordInputField" | "emailInputField">>;
 export default _default;
