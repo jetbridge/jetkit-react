@@ -77,14 +77,11 @@ const LoginScreen: React.FunctionComponent<ILoginScreenProps> = ({
     emailLabel = 'Email',
     userEmail = '',
     onInputChange,
-    submitButtonProps = {
-        variant: 'contained',
-        color: 'primary',
-    },
+    submitButtonProps,
     classes,
     titleVariant = 'h3',
 }) => {
-    const [inputFields, setInputValues] = React.useState<LoginScreenState>({
+    const [inputFields, setInputValues] = React.useState({
         email: userEmail,
         password: '',
         showPassword: false,
