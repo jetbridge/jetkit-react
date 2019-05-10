@@ -54,7 +54,13 @@ interface ILoginScreenProps extends WithStyles<typeof styles> {
     emailLabel?: string
     passwordLabel?: string
     userEmail?: string
-    onInputChange?(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void
+    onInputChange?({
+        event,
+        key,
+    }: {
+        event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+        key: 'email' | 'password'
+    }): void
     emailError?: boolean
     emailHelperText?: string
     passwordError?: boolean
@@ -95,7 +101,7 @@ const LoginScreen: React.FunctionComponent<ILoginScreenProps> = ({
             ...prevState,
             [key]: event.target.value,
         }))
-        if (onInputChange) onInputChange(event)
+        if (onInputChange) onInputChange({ event, key })
     }
 
     const handleClickShowPassword = () => {
