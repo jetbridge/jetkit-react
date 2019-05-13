@@ -6,8 +6,8 @@
         "sourceMap": true,
         "jsx": "react",
         "declaration": true,
-        "declarationDir": "./dist",
-        "outDir": "./dist",
+        "declarationDir": "./build",
+        "outDir": "./build",
         "forceConsistentCasingInFileNames": true,
         "noImplicitReturns": true,
         "noImplicitThis": true,
@@ -18,5 +18,5 @@
         "extendedDiagnostics": false
     },
     "include": ["src/**/*"],
-    "exclude": ["node_modules", "build", "dist"]
+    "exclude": ["node_modules", "build"]
 }
