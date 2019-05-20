@@ -1,3 +1,23 @@
+import { apiClient } from './apiClient/index'
 import LoginScreen from './LoginScreen'
+import {
+    authReducer,
+    IAuthenticatedApplicationState,
+    isAuthenticated,
+    storeAccessToken,
+    getAccessToken,
+    getFreshToken,
+    authenticate,
+} from './store/auth'
 
-export { LoginScreen }
+export {
+    LoginScreen,
+    apiClient,
+    authReducer,
+    IAuthenticatedApplicationState,
+    isAuthenticated,
+    storeAccessToken,
+    getAccessToken,
+    getFreshToken,
+    authenticate,
+}
