@@ -1,7 +1,7 @@
 import axios from 'axios'
-import tokenProvider from 'axios-token-interceptor'
+import * as tokenProvider from 'axios-token-interceptor'
 import * as jwt from 'jsonwebtoken'
-import { storeAccessToken, getAccessToken, getFreshToken } from '../store/auth'
+import { storeAccessToken, getAccessToken, getFreshToken, authState } from '../store/auth'
 
 const BASE_URL = 'http://localhost:5000/api/'
 
@@ -9,13 +9,21 @@ export const apiClient = axios.create()
 apiClient.defaults.headers.common['Content-Type'] = 'application/json'
 apiClient.defaults.baseURL = BASE_URL
 
+interface IStore extends authState {
+    dispatch: Function
+}
+
+interface TokenCache {
+    reset(): void
+}
+
 class TokenStorage {
-    private store?: any
-    private cache?: any
+    private store?: IStore
+    private cache?: TokenCache
     private enqueueSnackbar?: Function
     private closeSnackbar?: Function
 
-    public setStore(store: any) {
+    public setStore(store: IStore) {
         this.store = store
     }
 
@@ -26,23 +34,23 @@ class TokenStorage {
     public configure = ({ enqueueSnackbar, closeSnackbar }) => {
         // cache access token on token provider
         // after `getMaxAge` it will call this.refreshToken()
-        this.cache = tokenProvider.tokenCache(this.getToken as any, {
-            getMaxAge: ((token: string) => this.getExpiresInFromJWT(token)) as any,
+        this.cache = tokenProvider.tokenCache(this.getToken, {
+            getMaxAge: (token: string) => this.getExpiresInFromJWT(token),
         })
         this.enqueueSnackbar = enqueueSnackbar
         this.closeSnackbar = closeSnackbar
     }
 
     public getToken = async () => {
-        const accessToken = this.store.dispatch(getAccessToken())
+        const accessToken = this.store && this.store.dispatch(getAccessToken())
         if (this.isTokenExpired(accessToken)) {
             // if token expired
             const newToken = await this.refreshToken() // ask for new access token
             if (!newToken) return
 
-            this.cache.reset() // reset cache (just in cache)
+            this.cache && this.cache.reset() // reset cache (just in cache)
             // store access token
-            this.store.dispatch(storeAccessToken(newToken))
+            this.store && this.store.dispatch(storeAccessToken(newToken))
 
             return newToken
         } else {
@@ -57,8 +65,8 @@ class TokenStorage {
 
     // gets unix TS
     private getTokenExpiresTimeStamp = (token: string) => {
-        const decoded = jwt.decode(token) as any
-        return decoded && decoded.exp - 20
+        const decoded = jwt.decode(token)
+        return decoded && decoded['exp'] - 20
     }
 
     private getExpiresInFromJWT = (token: string): number => {
@@ -70,7 +78,8 @@ class TokenStorage {
 
     private refreshToken = async (): Promise<string> => {
         try {
-            const tokens = await this.store.dispatch(getFreshToken())
+            if (!this.store) return ''
+            const tokens = (await this.store) && this.store.dispatch(getFreshToken())
             return tokens ? tokens.access_token : ''
         } catch (err) {
             return ''
@@ -78,12 +87,12 @@ class TokenStorage {
     }
 
     public reset = () => {
-        this.cache.reset()
+        this.cache && this.cache.reset()
     }
 }
 export const tokenStorage = new TokenStorage()
 
-export const connectStoreToAPIClient = (store: any, { enqueueSnackbar, closeSnackbar }) => {
+export const connectStoreToAPIClient = (store: IStore, { enqueueSnackbar, closeSnackbar }) => {
     tokenStorage.setStore(store)
     tokenStorage.configure({ enqueueSnackbar, closeSnackbar })
     const tokenProviderOptions = {

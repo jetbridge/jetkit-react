@@ -2,7 +2,7 @@ import { Dispatch, Reducer } from 'redux'
 import { createStandardAction, getType } from 'typesafe-actions'
 import { login, refreshToken } from '../apiClient/auth'
 
-interface IAction<T> {
+export interface IAction<T> {
     type: string
     payload: T
 }
@@ -11,7 +11,7 @@ export interface IAuthenticatedApplicationState {
     auth: IUserCredential
 }
 
-type GetState = () => IAuthenticatedApplicationState
+export type GetState = () => IAuthenticatedApplicationState
 export interface ICredentials {
     readonly refresh_token: string
     readonly access_token: string
@@ -69,6 +69,8 @@ const reducer: Reducer<IUserCredential> = (state = initialState, action) => {
     }
 }
 
+export type authState = ReturnType<typeof reducer>
+
 export function authenticate(email: string, password: string) {
     return (dispatch: Dispatch, getState: GetState) => {
         return login(email, password).then(response => {
@@ -92,11 +94,9 @@ export const credentialsSelector = (state: IAuthenticatedApplicationState): ICre
     return state.auth.tokens
 }
 
-export function getAccessToken() {
-    return (dispatch: Dispatch, getState: GetState) => {
-        const creds = credentialsSelector(getState())
-        return creds ? creds.access_token : null
-    }
+export const getAccessToken = () => (dispatch: Dispatch, getState: GetState) => {
+    const creds = credentialsSelector(getState())
+    return creds ? creds.access_token : null
 }
 
 export const isAuthenticated = (state: IAuthenticatedApplicationState): boolean => {
