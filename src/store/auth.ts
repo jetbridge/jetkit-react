@@ -1,6 +1,6 @@
 import { Dispatch, Reducer } from 'redux'
 import { createStandardAction, getType } from 'typesafe-actions'
-import { login, refreshToken } from '../apiClient/auth'
+import { login, refreshToken, IRefreshTokenResponse } from '../apiClient/auth'
 
 export interface IAction<T> {
     type: string
@@ -80,7 +80,7 @@ export function authenticate(email: string, password: string) {
 }
 
 export function getFreshToken() {
-    return async (dispatch: Dispatch, getState: GetState): Promise<ICredentials> => {
+    return async (dispatch: Dispatch, getState: GetState): Promise<ICredentials | IRefreshTokenResponse> => {
         const creds = credentialsSelector(getState())
         const token = creds ? creds.refresh_token : null
         if (!token) return Promise.reject('No refresh token')

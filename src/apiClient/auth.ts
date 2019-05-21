@@ -1,7 +1,7 @@
 import apiClient, { tokenStorage } from '.'
 import { IUserCredential } from '../store/auth'
 
-interface IRefreshTokenResponse {
+export interface IRefreshTokenResponse {
     access_token: string
 }
 
