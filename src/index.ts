@@ -8,6 +8,7 @@ import {
     getAccessToken,
     getFreshToken,
     authenticate,
+    IUser,
 } from './store/auth'
 
 // exporting AuthRedux as a separate entity
@@ -21,4 +22,4 @@ const AuthRedux = {
     authenticate,
 }
 
-export { LoginScreen, apiClient, AuthRedux, IAuthenticatedApplicationState }
+export { LoginScreen, apiClient, AuthRedux, IAuthenticatedApplicationState, IUser }
