@@ -10,14 +10,15 @@ import {
     authenticate,
 } from './store/auth'
 
-export {
-    LoginScreen,
-    apiClient,
+// exporting AuthRedux as a separate entity
+// TODO: add more documentation and interfaces
+const AuthRedux = {
     authReducer,
-    IAuthenticatedApplicationState,
     isAuthenticated,
     storeAccessToken,
     getAccessToken,
     getFreshToken,
     authenticate,
 }
+
+export { LoginScreen, apiClient, AuthRedux, IAuthenticatedApplicationState }
