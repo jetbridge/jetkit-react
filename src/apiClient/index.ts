@@ -3,7 +3,7 @@ import * as tokenProvider from 'axios-token-interceptor'
 import * as jwt from 'jsonwebtoken'
 import { storeAccessToken, getAccessToken, getFreshToken, authState } from '../store/auth'
 
-const BASE_URL = 'http://localhost:5000/api/'
+const BASE_URL = process.env.REACT_APP_BASE_URL
 
 export const apiClient = axios.create()
 apiClient.defaults.headers.common['Content-Type'] = 'application/json'
