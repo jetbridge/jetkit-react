@@ -3,6 +3,7 @@ import * as tokenProvider from 'axios-token-interceptor'
 import * as jwt from 'jsonwebtoken'
 import { storeAccessToken, getAccessToken, getFreshToken, authState } from '../store/auth'
 
+// https://facebook.github.io/create-react-app/docs/adding-custom-environment-variables
 const BASE_URL = process.env.REACT_APP_BASE_URL
 
 export const apiClient = axios.create()
