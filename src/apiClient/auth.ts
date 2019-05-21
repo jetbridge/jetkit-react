@@ -1,7 +1,11 @@
 import apiClient, { tokenStorage } from '.'
 import { IUserCredential } from '../store/auth'
 
-export const refreshToken = async (refresh_token: string) => {
+interface IRefreshTokenResponse {
+    access_token: string
+}
+
+export const refreshToken = async (refresh_token: string): Promise<IRefreshTokenResponse> => {
     try {
         const res = await apiClient.post('/auth/refresh', { refresh_token })
         return res.data
