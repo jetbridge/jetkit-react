@@ -33,7 +33,7 @@ class TokenStorage {
     public configure = () => {
         // cache access token on token provider
         // after `getMaxAge` it will call this.refreshToken()
-        this.cache = tokenProvider.tokenCache(this.getToken as unknown, {
+        this.cache = tokenProvider.tokenCache(this.getToken() as Promise<string>, {
             getMaxAge: (token: string) => this.getExpiresInFromJWT(token),
         })
     }
