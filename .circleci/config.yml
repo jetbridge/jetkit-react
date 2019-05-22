@@ -9,12 +9,6 @@ jobs:
             - image: circleci/node:10
         steps:
             - checkout
-            - restore_cache:
-                  keys:
-                      - v1-dependencies-{{ checksum "yarn.lock" }}
-                      - v1-dependencies-{{ checksum "package.json" }}
-                      # fallback to using the latest cache if no exact match is found
-                      - v1-dependencies-
             - run:
                   name: Install yarn dependencies
                   command: yarn install
@@ -27,8 +21,7 @@ jobs:
                   key: v1-dependencies-{{ checksum "yarn.lock" }}
             - run:
                   name: Build application
-                  command:
-                      yarn build
+                  command: yarn build
             - run:
                   name: ESLint
                   command: |
@@ -40,6 +33,6 @@ jobs:
                   environment:
                       JEST_JUNIT_OUTPUT: 'reports/junit/js-test-results.xml'
             - store_test_results:
-                path: reports
+                  path: reports
             - store_artifacts:
-                path: coverage
+                  path: coverage
