@@ -21,8 +21,6 @@ interface TokenCache {
 class TokenStorage {
     private store?: IStore
     private cache?: TokenCache
-    private enqueueSnackbar?: Function
-    private closeSnackbar?: Function
 
     public setStore(store: IStore) {
         this.store = store
@@ -32,14 +30,12 @@ class TokenStorage {
         return this.cache
     }
 
-    public configure = ({ enqueueSnackbar, closeSnackbar }) => {
+    public configure = () => {
         // cache access token on token provider
         // after `getMaxAge` it will call this.refreshToken()
-        this.cache = tokenProvider.tokenCache(this.getToken, {
+        this.cache = tokenProvider.tokenCache(this.getToken as () => Promise<string>, {
             getMaxAge: (token: string) => this.getExpiresInFromJWT(token),
         })
-        this.enqueueSnackbar = enqueueSnackbar
-        this.closeSnackbar = closeSnackbar
     }
 
     public getToken = async () => {
@@ -93,9 +89,9 @@ class TokenStorage {
 }
 export const tokenStorage = new TokenStorage()
 
-export const connectStoreToAPIClient = (store: IStore, { enqueueSnackbar, closeSnackbar }) => {
+export const connectStoreToAPIClient = (store: IStore) => {
     tokenStorage.setStore(store)
-    tokenStorage.configure({ enqueueSnackbar, closeSnackbar })
+    tokenStorage.configure()
     const tokenProviderOptions = {
         header: 'Authorization',
         getToken: tokenStorage.getCache(),
