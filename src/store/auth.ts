@@ -72,10 +72,9 @@ const reducer: Reducer<IUserCredential> = (state = initialState, action) => {
 export type authState = ReturnType<typeof reducer>
 
 export function authenticate(email: string, password: string) {
-    return (dispatch: Dispatch, getState: GetState) => {
-        return login(email, password).then(response => {
-            dispatch(storeCredentials(response))
-        })
+    return async (dispatch: Dispatch, getState: GetState) => {
+        const credentials = await login(email, password)
+        return dispatch(storeCredentials(credentials))
     }
 }
 
