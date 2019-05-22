@@ -81,14 +81,4 @@ class TokenStorage {
 }
 export const tokenStorage = new TokenStorage()
 
-export const connectStoreToAPIClient = (store: IStore) => {
-    tokenStorage.setStore(store)
-    const tokenProviderOptions = {
-        header: 'Authorization',
-        getToken: tokenStorage.getCache(),
-    }
-
-    apiClient.interceptors.request.use(tokenProvider(tokenProviderOptions))
-}
-
 export default apiClient
