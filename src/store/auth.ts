@@ -1,7 +1,8 @@
 import { Dispatch, Reducer } from 'redux'
 import { createStandardAction, getType } from 'typesafe-actions'
+import { login, refreshToken, IRefreshTokenResponse } from '../apiClient/auth'
 
-interface IAction<T> {
+export interface IAction<T> {
     type: string
     payload: T
 }
@@ -10,6 +11,7 @@ export interface IAuthenticatedApplicationState {
     auth: IUserCredential
 }
 
+export type GetState = () => IAuthenticatedApplicationState
 export interface ICredentials {
     readonly refresh_token: string
     readonly access_token: string
@@ -32,6 +34,7 @@ export interface IUserCredential {
 export const initialState: IUserCredential = {}
 
 export const storeAccessToken = createStandardAction('auth/storeAccessToken')<string>()
+export const storeCredentials = createStandardAction('auth/storeCreds')<IUserCredential>()
 
 const reducer: Reducer<IUserCredential> = (state = initialState, action) => {
     switch (action.type) {
@@ -40,7 +43,6 @@ const reducer: Reducer<IUserCredential> = (state = initialState, action) => {
                 console.error('got storeAccessToken but we are missing refresh token. cannot continue.')
                 return state
             }
-
             return {
                 ...state,
                 tokens: {
@@ -49,10 +51,51 @@ const reducer: Reducer<IUserCredential> = (state = initialState, action) => {
                 },
             }
         }
+        case getType(storeCredentials): {
+            return {
+                ...state,
+                tokens: {
+                    access_token: action.payload.access_token,
+                    refresh_token: action.payload.refreshToken,
+                },
+                user: {
+                    name: action.payload.user.name,
+                },
+            }
+        }
         default: {
             return state
         }
     }
+}
+
+export type authState = ReturnType<typeof reducer>
+
+export function authenticate(email: string, password: string) {
+    return async (dispatch: Dispatch, getState: GetState) => {
+        const credentials = await login(email, password)
+        return dispatch(storeCredentials(credentials))
+    }
+}
+
+export function getFreshToken() {
+    return async (dispatch: Dispatch, getState: GetState): Promise<ICredentials | IRefreshTokenResponse> => {
+        const creds = credentialsSelector(getState())
+        const token = creds ? creds.refresh_token : null
+        if (!token) return Promise.reject('No refresh token')
+
+        // refresh
+        return await refreshToken(token)
+    }
+}
+
+export const credentialsSelector = (state: IAuthenticatedApplicationState): ICredentials | undefined => {
+    return state.auth.tokens
+}
+
+export const getAccessToken = () => (dispatch: Dispatch, getState: GetState) => {
+    const creds = credentialsSelector(getState())
+    return creds ? creds.access_token : null
 }
 
 export const isAuthenticated = (state: IAuthenticatedApplicationState): boolean => {

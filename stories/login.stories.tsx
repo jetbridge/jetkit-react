@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { storiesOf } from '@storybook/react'
-import LoginScreen from '../src/components/login/index'
+import LoginScreen from '../src/LoginScreen/'
 import centered from '@storybook/addon-centered/react'
 
 storiesOf('Login', module)
     .addDecorator(centered)
     .add('Loginscreen', () => {
-        return <LoginScreen />
+        return <LoginScreen onSubmitClick={() => console.log('test')} />
     })
