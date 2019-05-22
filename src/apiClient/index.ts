@@ -10,10 +10,6 @@ export const apiClient = axios.create()
 apiClient.defaults.headers.common['Content-Type'] = 'application/json'
 apiClient.defaults.baseURL = BASE_URL
 
-interface IDecode {
-    [key: string]: string
-}
-
 interface IStore extends authState {
     dispatch: Function
 }
@@ -58,7 +54,7 @@ class TokenStorage {
 
     // gets unix TS
     private getTokenExpiresTimeStamp = (token: string) => {
-        const decoded: IDecode | null | string = jwt.decode(token)
+        const decoded = jwt.decode(token)
         return decoded && decoded['exp'] - 20
     }
 
