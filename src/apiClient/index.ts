@@ -30,14 +30,6 @@ class TokenStorage {
         return this.cache
     }
 
-    public configure = () => {
-        // cache access token on token provider
-        // after `getMaxAge` it will call this.refreshToken()
-        this.cache = tokenProvider.tokenCache(this.getToken() as Promise<string>, {
-            getMaxAge: (token: string) => this.getExpiresInFromJWT(token),
-        })
-    }
-
     public getToken = async () => {
         const accessToken = this.store && this.store.dispatch(getAccessToken())
         if (this.isTokenExpired(accessToken)) {
@@ -91,7 +83,6 @@ export const tokenStorage = new TokenStorage()
 
 export const connectStoreToAPIClient = (store: IStore) => {
     tokenStorage.setStore(store)
-    tokenStorage.configure()
     const tokenProviderOptions = {
         header: 'Authorization',
         getToken: tokenStorage.getCache(),
