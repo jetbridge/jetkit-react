@@ -11,12 +11,13 @@
         "jsonwebtoken": "^8.5.1",
         "redux": "^4.0.1",
         "typesafe-actions": "^4.2.1",
-        "typescript": "3.4.5"
+        "typescript": "3.4.5",
+        "react-scripts": "3.0.1"
     },
     "peerDependencies": {
         "react": "^16.8.6",
         "react-dom": "^16.8.6",
-        "react-scripts": "3.0.0"
+        "react-scripts": "3.0.1"
     },
     "scripts": {
         "test-ci": "CI=1 react-scripts test",
@@ -68,7 +69,6 @@
         "react-docgen-typescript-loader": "^3.1.0",
         "react-docgen-typescript-webpack-plugin": "^1.1.0",
         "react-dom": "^16.8.6",
-        "react-scripts": "3.0.0",
         "storybook": "^1.0.0",
         "ts-jest": "^24.0.2"
     },
