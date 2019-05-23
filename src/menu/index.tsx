@@ -24,12 +24,12 @@ interface IMenuProps extends WithStyles<typeof styles> {
     sections: IMenuSection[]
     defaultSelectedSubSection?: any
     defaultSelectedSection?: IMenuSection
-    onSectionSelected?: (section: IMenuSection, subSectionTitle: string) => void
+    sectionSelected?: (section: IMenuSection, subSectionTitle: string) => void
 }
 
 const Menu: React.FC<IMenuProps> = ({
     defaultSelectedSection,
-    onSectionSelected,
+    sectionSelected: onSectionSelected,
     defaultSelectedSubSection,
     classes,
     sections,
