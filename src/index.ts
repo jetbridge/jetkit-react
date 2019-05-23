@@ -22,7 +22,6 @@ const AuthRedux = {
     getAccessToken,
     getFreshToken,
     authenticate,
-    Menu,
 }
 
-export { LoginScreen, apiClient, AuthRedux, IAuthenticatedApplicationState, IUser, IUserCredential }
+export { LoginScreen, apiClient, AuthRedux, IAuthenticatedApplicationState, IUser, IUserCredential, Menu }
