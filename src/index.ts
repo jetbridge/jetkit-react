@@ -1,5 +1,6 @@
 import { apiClient } from './apiClient/index'
 import LoginScreen from './LoginScreen'
+import Menu from './menu'
 import {
     authReducer,
     IAuthenticatedApplicationState,
@@ -21,6 +22,7 @@ const AuthRedux = {
     getAccessToken,
     getFreshToken,
     authenticate,
+    Menu,
 }
 
 export { LoginScreen, apiClient, AuthRedux, IAuthenticatedApplicationState, IUser, IUserCredential }
