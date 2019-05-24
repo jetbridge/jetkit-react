@@ -3,5 +3,5 @@ export interface IMenuSection {
     path: string
     subsections?: IMenuSection[]
     expanded?: boolean
-    icon?: React.ElementType
+    icon?: React.ElementType | HTMLElement
 }
