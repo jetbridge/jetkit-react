@@ -5,5 +5,5 @@ export interface IMenuSection {
     path: string
     subsections?: IMenuSection[]
     expanded?: boolean
-    icon?: React.ElementType | React.ComponentType<SvgIconProps>
+    icon?: any //TODO: FIX ANY!
 }

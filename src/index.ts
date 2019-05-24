@@ -1,3 +1,4 @@
+import { IMenuSection } from './types'
 import { apiClient } from './apiClient/index'
 import LoginScreen from './LoginScreen'
 import Menu from './menu'
@@ -24,4 +25,4 @@ const AuthRedux = {
     authenticate,
 }
 
-export { LoginScreen, apiClient, AuthRedux, IAuthenticatedApplicationState, IUser, IUserCredential, Menu }
+export { LoginScreen, apiClient, AuthRedux, IAuthenticatedApplicationState, IUser, IUserCredential, Menu, IMenuSection }

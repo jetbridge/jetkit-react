@@ -46,12 +46,14 @@ const styles = (theme: Theme) =>
         },
         sectionTitle: {
             letterSpacing: '0.25em',
-            fontSize: '1.1rem',
+            fontSize: '0.9rem',
             textTransform: 'uppercase',
             color: theme.palette.primary.contrastText,
             fontWeight: 'bold',
+            marginLeft: '1rem',
         },
         sectionRoot: {
+            margin: '10px 0',
             boxShadow: 'none',
             '&:before': {
                 height: 0,
@@ -76,6 +78,7 @@ const Section: React.FC<ISectionProps> = ({ classes, onClick, selectedSubSection
 
     const subSections = section.subsections || []
     const menuListClass = expanded ? classes.selectedBackground : classes.defaultBackground
+
     return (
         <ExpansionPanel
             onClick={handleClick()}
@@ -84,7 +87,10 @@ const Section: React.FC<ISectionProps> = ({ classes, onClick, selectedSubSection
             expanded={expanded}
         >
             <ExpansionPanelSummary>
-                <Typography className={classes.sectionTitle}>{section.title}</Typography>
+                <span style={{ display: 'flex' }}>
+                    {section.icon}
+                    <Typography className={classes.sectionTitle}>{section.title}</Typography>
+                </span>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails style={{ padding: 0 }}>
                 <List className={classes.subSectionsList}>
