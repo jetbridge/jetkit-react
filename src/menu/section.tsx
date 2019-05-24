@@ -17,7 +17,7 @@ const styles = (theme: Theme) =>
             color: theme.palette.primary.contrastText,
         },
         defaultBackground: {
-            backgroundColor: '#141922',
+            backgroundColor: '#F6F6F8',
             color: theme.palette.primary.contrastText,
         },
         selectedItem: {
@@ -48,7 +48,7 @@ const styles = (theme: Theme) =>
             letterSpacing: '0.25em',
             fontSize: '0.8rem',
             textTransform: 'uppercase',
-            color: theme.palette.primary.contrastText,
+            color: 'black',
             fontWeight: 'bold',
             marginLeft: '1rem',
         },

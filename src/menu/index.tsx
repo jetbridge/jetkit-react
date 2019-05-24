@@ -9,9 +9,8 @@ const styles = (theme: Theme) =>
         container: {
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'space-between',
             color: theme.palette.primary.contrastText,
-            backgroundColor: '#141922',
+            backgroundColor: '#F6F6F8',
             width: theme.navWidth,
             minWidth: theme.navWidth,
             paddingTop: '2.5rem',
