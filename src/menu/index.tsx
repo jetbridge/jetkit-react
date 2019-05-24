@@ -11,12 +11,13 @@ const styles = (theme: Theme) =>
             flexDirection: 'column',
             justifyContent: 'space-between',
             color: theme.palette.primary.contrastText,
-            backgroundColor: theme.palette.primary.dark,
+            backgroundColor: '#141922',
             width: theme.navWidth,
             minWidth: theme.navWidth,
             paddingTop: '2.5rem',
             boxShadow: '1px 0px 5px 0px rgba(0,0,0,0.25)',
             position: 'relative',
+            alignItems: 'center',
         },
     })
 
@@ -25,6 +26,7 @@ interface IMenuProps extends WithStyles<typeof styles> {
     defaultSelectedSubSection?: any
     defaultSelectedSection?: IMenuSection
     sectionSelected?: (section: IMenuSection, subSectionTitle: string) => void
+    logoSrc: string
 }
 
 const Menu: React.FC<IMenuProps> = ({
@@ -33,6 +35,7 @@ const Menu: React.FC<IMenuProps> = ({
     defaultSelectedSubSection,
     classes,
     sections,
+    logoSrc,
 }) => {
     const [state, setState] = React.useState({
         selectedSection: defaultSelectedSection,
@@ -62,6 +65,7 @@ const Menu: React.FC<IMenuProps> = ({
 
     return (
         <div className={classes.container}>
+            {logoSrc && <img src={logoSrc} width="250" alt="logo" />}
             <div>
                 {sections.map(s => (
                     <Section

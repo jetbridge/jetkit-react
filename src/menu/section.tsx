@@ -17,7 +17,7 @@ const styles = (theme: Theme) =>
             color: theme.palette.primary.contrastText,
         },
         defaultBackground: {
-            backgroundColor: theme.palette.primary.dark,
+            backgroundColor: '#141922',
             color: theme.palette.primary.contrastText,
         },
         selectedItem: {
@@ -46,7 +46,7 @@ const styles = (theme: Theme) =>
         },
         sectionTitle: {
             letterSpacing: '0.25em',
-            fontSize: '0.9rem',
+            fontSize: '0.8rem',
             textTransform: 'uppercase',
             color: theme.palette.primary.contrastText,
             fontWeight: 'bold',
@@ -87,7 +87,7 @@ const Section: React.FC<ISectionProps> = ({ classes, onClick, selectedSubSection
             expanded={expanded}
         >
             <ExpansionPanelSummary>
-                <span style={{ display: 'flex' }}>
+                <span style={{ display: 'flex', alignItems: 'center' }}>
                     {section.icon}
                     <Typography className={classes.sectionTitle}>{section.title}</Typography>
                 </span>
