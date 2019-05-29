@@ -52,6 +52,8 @@ const styles = (theme: Theme) =>
             color: 'black',
             marginLeft: '1rem',
             fontFamily: 'Avenir',
+            opacity: 0.84,
+            lineHeight: 'normal',
         },
         sectionRoot: {
             margin: '10px 0',
