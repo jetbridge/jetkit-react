@@ -77,8 +77,7 @@ const Menu: React.FC<IMenuProps> = ({
                         key={s.title}
                         section={s}
                         onClick={onClick}
-                        // expanded={selectedSection === s}
-                        expanded={false}
+                        expanded={state.selectedSection === s}
                         selectedSubSection={state.selectedSubSection[s.title]}
                     />
                 ))}

@@ -13,8 +13,8 @@ import classNames from 'classnames'
 const styles = (theme: Theme) =>
     createStyles({
         selectedBackground: {
-            backgroundColor: theme.palette.primary.dark,
-            color: theme.palette.primary.contrastText,
+            backgroundImage: 'linear-gradient(to left, #213161, #24489e)',
+            color: 'white',
         },
         defaultBackground: {
             backgroundColor: '#F6F6F8',
@@ -92,7 +92,9 @@ const Section: React.FC<ISectionProps> = ({ classes, onClick, selectedSubSection
             <ExpansionPanelSummary>
                 <span style={{ display: 'flex', justifyContent: 'center' }}>
                     {section.icon}
-                    <Typography className={classes.sectionTitle}>{section.title}</Typography>
+                    <Typography style={{ color: expanded ? 'white' : 'black' }} className={classes.sectionTitle}>
+                        {section.title}
+                    </Typography>
                 </span>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails style={{ padding: 0 }}>
