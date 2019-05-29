@@ -46,11 +46,12 @@ const styles = (theme: Theme) =>
         },
         sectionTitle: {
             letterSpacing: '0.25em',
-            fontSize: '0.8rem',
+            fontSize: 18,
+            fontWeight: 500,
             textTransform: 'uppercase',
             color: 'black',
-            fontWeight: 'bold',
             marginLeft: '1rem',
+            fontFamily: 'Avenir',
         },
         sectionRoot: {
             margin: '10px 0',
@@ -87,7 +88,7 @@ const Section: React.FC<ISectionProps> = ({ classes, onClick, selectedSubSection
             expanded={expanded}
         >
             <ExpansionPanelSummary>
-                <span style={{ display: 'flex', alignItems: 'center' }}>
+                <span style={{ display: 'flex', justifyContent: 'center' }}>
                     {section.icon}
                     <Typography className={classes.sectionTitle}>{section.title}</Typography>
                 </span>
