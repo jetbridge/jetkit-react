@@ -3,6 +3,7 @@ import { IMenuSection } from '../types'
 import { createStyles, withStyles, WithStyles } from '@material-ui/core/styles'
 import { Theme } from '@material-ui/core/styles/createMuiTheme'
 import Section from './section'
+import UserSection from './userSection'
 
 const styles = (theme: Theme) =>
     createStyles({
@@ -26,6 +27,8 @@ interface IMenuProps extends WithStyles<typeof styles> {
     defaultSelectedSection?: IMenuSection
     sectionSelected?: (section: IMenuSection, subSectionTitle: string) => void
     logoSrc: string
+    userName?: string
+    avatarSrc?: string
 }
 
 const Menu: React.FC<IMenuProps> = ({
@@ -35,6 +38,8 @@ const Menu: React.FC<IMenuProps> = ({
     classes,
     sections,
     logoSrc,
+    userName,
+    avatarSrc,
 }) => {
     const [state, setState] = React.useState({
         selectedSection: defaultSelectedSection,
@@ -65,6 +70,7 @@ const Menu: React.FC<IMenuProps> = ({
     return (
         <div className={classes.container}>
             {logoSrc && <img src={logoSrc} width="250" alt="logo" />}
+            {userName && <UserSection avatarSrc={avatarSrc} userName={userName} />}
             <div>
                 {sections.map(s => (
                     <Section
