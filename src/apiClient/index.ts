@@ -47,14 +47,14 @@ export const authResponseToAuthTokens = (res: IAuthResponse): IAuthTokens => ({
   refreshToken: res.refresh_token,
 })
 
-export const requestRefresh: TokenRefreshRequest = async (refreshToken: string): Promise<IAuthTokens> => {
+export const requestRefresh: TokenRefreshRequest = async (refreshToken: string): Promise<string> => {
   // perform refresh
   const res: IAuthResponse = (await axios.post(refreshEndpoint, null, {
     headers: {
       Authorization: `Bearer ${refreshToken}`,
     },
   })).data
-  return authResponseToAuthTokens(res)
+  return res.access_token
 }
 
 // JWT/refresh interceptor
