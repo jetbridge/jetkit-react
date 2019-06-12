@@ -34,7 +34,6 @@ const theme = createMuiTheme({
     background: { default: '#f5f5f5', paper: 'white' },
   },
   typography: {
-    useNextVariants: true,
     fontFamily: primaryFont,
   },
   navWidth: 270,
