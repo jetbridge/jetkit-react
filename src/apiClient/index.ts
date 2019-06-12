@@ -31,6 +31,7 @@ class TokenStorage {
     }
 
     public getToken = async () => {
+        console.log('get token')
         const accessToken = this.store && this.store.dispatch(getAccessToken())
         if (this.isTokenExpired(accessToken)) {
             // if token expired
