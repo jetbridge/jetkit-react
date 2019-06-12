@@ -1971,6 +1971,13 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.8.0.tgz#f0e003d9ca9e7f59c7a508945d7b2ef9a04a542f"
   integrity sha512-ReZxvNHIOv88FlT7rxcXIIC0fPt4KZqZbOlivyWtXLt8ESx84zd3kMC6iK5jVeS2qt+g7ftS7ye4fi06X5rtRQ==
 
+axios-jwt@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/axios-jwt/-/axios-jwt-1.0.2.tgz#cfe07a0c2f7239c8777bbafab4076ed8b7b48dbf"
+  integrity sha512-6GVBUBjIB0jYBSwDAzgQoDDqHRhWIR4uC2v2mC8mx+ok3Q/9cY+eLpG1SIBid5OTQXMMa40HIgc5XztjiKomiQ==
+  dependencies:
+    jsonwebtoken "^8.5.1"
+
 axios-token-interceptor@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/axios-token-interceptor/-/axios-token-interceptor-0.1.0.tgz#e848bbc57fa694ddb83e4ad0982db3304b88a926"
