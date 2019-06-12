@@ -1,7 +1,6 @@
 import axios from 'axios'
-import * as tokenProvider from 'axios-token-interceptor'
-import * as jwt from 'jsonwebtoken'
-import { storeAccessToken, getAccessToken, getFreshToken, authState } from '../store/auth'
+import { useAuthTokenInterceptor } from 'axios-jwt'
+import { IAuthTokens, TokenRefreshRequest } from 'axios-jwt'
 
 // https://facebook.github.io/create-react-app/docs/adding-custom-environment-variables
 const BASE_URL = process.env.REACT_APP_BASE_URL
@@ -10,76 +9,55 @@ export const apiClient = axios.create()
 apiClient.defaults.headers.common['Content-Type'] = 'application/json'
 apiClient.defaults.baseURL = BASE_URL
 
-interface IStore extends authState {
-    dispatch: Function
+// query params serializer for converting params name from ids[] to ids without square brackets
+const parseParams = (params: any) => {
+  const keys = Object.keys(params)
+  let options = ''
+
+  keys.forEach(key => {
+    const isParamTypeObject = typeof params[key] === 'object'
+    const isParamTypeArray = isParamTypeObject && params[key].length >= 0
+
+    if (!isParamTypeObject) {
+      options += `${key}=${params[key]}&`
+    }
+
+    if (isParamTypeObject && isParamTypeArray) {
+      params[key].forEach((element: string) => {
+        options += `${key}=${element}&`
+      })
+    }
+  })
+  return options ? options.slice(0, -1) : options
+}
+apiClient.defaults.paramsSerializer = parseParams
+
+// type of response from refresh token endpoint
+export interface IAuthResponse {
+  access_token: string
+  refresh_token: string
 }
 
-interface TokenCache {
-    reset(): void
+// refresh token endpoint
+const refreshEndpoint = `${BASE_URL}/auth/refresh`
+
+// transform response into IAuthTokens
+export const authResponseToAuthTokens = (res: IAuthResponse): IAuthTokens => ({
+  accessToken: res.access_token,
+  refreshToken: res.refresh_token,
+})
+
+export const requestRefresh: TokenRefreshRequest = async (refreshToken: string): Promise<IAuthTokens> => {
+  // perform refresh
+  const res: IAuthResponse = (await axios.post(refreshEndpoint, null, {
+    headers: {
+      Authorization: `Bearer ${refreshToken}`,
+    },
+  })).data
+  return authResponseToAuthTokens(res)
 }
 
-class TokenStorage {
-    private store?: IStore
-    private cache?: TokenCache
-
-    public setStore(store: IStore) {
-        this.store = store
-    }
-
-    public getCache() {
-        return this.cache
-    }
-
-    public getToken = async () => {
-        console.log('get token')
-        const accessToken = this.store && this.store.dispatch(getAccessToken())
-        if (this.isTokenExpired(accessToken)) {
-            // if token expired
-            const newToken = await this.refreshToken() // ask for new access token
-            if (!newToken) return
-
-            this.cache && this.cache.reset() // reset cache (just in cache)
-            // store access token
-            this.store && this.store.dispatch(storeAccessToken(newToken))
-
-            return newToken
-        } else {
-            return accessToken
-        }
-    }
-
-    private isTokenExpired = (token: string) => {
-        const expin = this.getExpiresInFromJWT(token)
-        return !expin || expin < 0
-    }
-
-    // gets unix TS
-    private getTokenExpiresTimeStamp = (token: string) => {
-        const decoded = jwt.decode(token)
-        return decoded && decoded['exp'] - 20
-    }
-
-    private getExpiresInFromJWT = (token: string): number => {
-        const exp = this.getTokenExpiresTimeStamp(token)
-        if (exp) return exp - Date.now() / 1000
-
-        return -1
-    }
-
-    private refreshToken = async (): Promise<string> => {
-        try {
-            if (!this.store) return ''
-            const tokens = (await this.store) && this.store.dispatch(getFreshToken())
-            return tokens ? tokens.access_token : ''
-        } catch (err) {
-            return ''
-        }
-    }
-
-    public reset = () => {
-        this.cache && this.cache.reset()
-    }
-}
-export const tokenStorage = new TokenStorage()
+// JWT/refresh interceptor
+useAuthTokenInterceptor(apiClient, { requestRefresh })
 
 export default apiClient

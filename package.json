@@ -1,12 +1,13 @@
 {
   "name": "@jetbridge/core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "module": "build/index.js",
   "types": "build/index.d.ts",
   "dependencies": {
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
     "axios": "^0.18.0",
+    "axios-jwt": "^1.0.2",
     "axios-token-interceptor": "^0.1.0",
     "jsonwebtoken": "^8.5.1",
     "react-scripts": "3.0.1",
