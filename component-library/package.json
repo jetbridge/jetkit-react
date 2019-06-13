@@ -3,33 +3,33 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@jetbridge/frontend-core": "link:..",
     "@types/jest": "24.0.13",
     "@types/node": "12.0.2",
     "@types/react": "16.8.18",
     "@types/react-dom": "16.8.4",
-    "jetbridge-react-scripts": "file:/Users/cyber/dev/jb/jbcra/packages/react-scripts",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "typescript": "3.4.5",
     "axios": "latest",
     "classnames": "latest",
-    "@jetbridge/frontend-core": "link:.."
+    "jetbridge-react-scripts": "^1.0.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "typescript": "3.4.5"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.5",
     "@storybook/addon-actions": "^5.0.11",
     "@storybook/addon-centered": "latest",
     "@storybook/addon-info": "latest",
     "@storybook/addon-links": "^5.0.11",
     "@storybook/addons": "^5.0.11",
+    "@storybook/react": "^5.0.11",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/storybook__react": "latest",
-    "lint-staged": "latest",
-    "prettier": "latest",
     "eslint": "latest",
     "husky": "latest",
-    "@storybook/react": "^5.0.11",
-    "@babel/core": "^7.4.5"
+    "lint-staged": "latest",
+    "prettier": "latest"
   },
   "husky": {
     "hooks": {

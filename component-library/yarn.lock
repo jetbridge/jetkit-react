@@ -7256,8 +7256,10 @@ jest@24.7.1:
     import-local "^2.0.0"
     jest-cli "^24.7.1"
 
-"jetbridge-react-scripts@file:../../jbcra/packages/react-scripts":
+jetbridge-react-scripts@^1.0.0:
   version "1.0.0"
+  resolved "https://registry.yarnpkg.com/jetbridge-react-scripts/-/jetbridge-react-scripts-1.0.0.tgz#72362b30a517dbc66860f166055124d847e5c8e5"
+  integrity sha512-yicgdvBORfTn73KplntngHusO9GtwSGIrYYU65iOtF8Lj1hvvAVj5eCX18ROTKYscuNcukYZ4tVOys3l4rH2Kw==
   dependencies:
     "@babel/core" "7.4.3"
     "@svgr/webpack" "4.2.0"
