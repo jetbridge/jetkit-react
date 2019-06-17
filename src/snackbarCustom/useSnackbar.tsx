@@ -1,5 +1,14 @@
 import * as React from 'react'
+import SnackbarCustom from '.'
 
+export const SNACKBAR_NOTIF_EVENT = 'JBSnackbarNotify'
+
+interface SnackbarNotificationEvent extends Event {
+  detail?: {
+    message: string
+    type: string
+  }
+}
 interface Options extends Event {
   detail?: {
     message: string
@@ -31,4 +40,26 @@ const useSnackbar = () => {
 
   return { open, handleClose, handleOpen, message, type, handleOpenFromEvent }
 }
+
+export const UseSnackbarUI = () => {
+  const snackbar = useSnackbar()
+
+  const snackbarNotifListener = React.useCallback(
+    (e: SnackbarNotificationEvent) => {
+      snackbar.handleOpenFromEvent(e)
+    },
+    [snackbar]
+  )
+
+  React.useEffect(() => {
+    document.addEventListener(SNACKBAR_NOTIF_EVENT, snackbarNotifListener)
+
+    return () => {
+      document.removeEventListener(SNACKBAR_NOTIF_EVENT, snackbarNotifListener)
+    }
+  })
+
+  return <SnackbarCustom {...snackbar} />
+}
+
 export default useSnackbar
