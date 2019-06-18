@@ -31,7 +31,8 @@ const useSnackbar = () => {
 
   const handleOpenFromEvent = React.useCallback(
     (options: Options) => {
-      const message = options.detail ? options.detail.message : ''
+      const message = options.detail && options.detail.message
+      if (!message) return
       const messageType = options.detail ? options.detail.messageType : 'default'
       showNotification(message, messageType)
     },
