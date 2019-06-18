@@ -23,7 +23,7 @@ const useSnackbar = () => {
   const handleClose = React.useCallback(() => {
     toggleOpen(false)
   }, [])
-  const handleOpen = React.useCallback((message, messageType) => {
+  const showNotification = React.useCallback((message, messageType) => {
     toggleOpen(true)
     setMessage(message)
     setType(messageType)
@@ -33,12 +33,12 @@ const useSnackbar = () => {
     (options: Options) => {
       const message = options.detail ? options.detail.message : ''
       const messageType = options.detail ? options.detail.messageType : 'default'
-      handleOpen(message, messageType)
+      showNotification(message, messageType)
     },
-    [handleOpen]
+    [showNotification]
   )
 
-  return { open, handleClose, handleOpen, message, messageType, handleOpenFromEvent }
+  return { open, handleClose, handleOpen: showNotification, message, messageType, handleOpenFromEvent }
 }
 
 export const UseSnackbarUI = () => {
