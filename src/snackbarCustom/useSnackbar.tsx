@@ -42,6 +42,11 @@ const useSnackbar = () => {
   return { open, handleClose, handleOpen: showNotification, message, messageType, handleOpenFromEvent }
 }
 
+/**
+ * Component to be imported in other projects for showing Material-UI notifications
+ * Listens for a CustomEvent of the following format:
+ * (JBSnackbarNotify, detail: { message: 'This is an alert', messageType: 'success'})
+ */
 export const UseSnackbarUI = () => {
   const snackbar = useSnackbar()
 
