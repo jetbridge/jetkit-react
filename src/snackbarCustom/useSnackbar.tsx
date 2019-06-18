@@ -6,39 +6,39 @@ export const SNACKBAR_NOTIF_EVENT = 'JBSnackbarNotify'
 interface SnackbarNotificationEvent extends Event {
   detail?: {
     message: string
-    type: string
+    messageType: string
   }
 }
 interface Options extends Event {
   detail?: {
     message: string
-    type: string
+    messageType: string
   }
 }
 
 const useSnackbar = () => {
   const [open, toggleOpen] = React.useState<boolean>(false)
-  const [type, setType] = React.useState<string>('')
+  const [messageType, setType] = React.useState<string>('')
   const [message, setMessage] = React.useState<string>('')
   const handleClose = React.useCallback(() => {
     toggleOpen(false)
   }, [])
-  const handleOpen = React.useCallback((message, type) => {
+  const handleOpen = React.useCallback((message, messageType) => {
     toggleOpen(true)
     setMessage(message)
-    setType(type)
+    setType(messageType)
   }, [])
 
   const handleOpenFromEvent = React.useCallback(
     (options: Options) => {
       const message = options.detail ? options.detail.message : ''
-      const type = options.detail ? options.detail.type : 'default'
-      handleOpen(message, type)
+      const messageType = options.detail ? options.detail.messageType : 'default'
+      handleOpen(message, messageType)
     },
     [handleOpen]
   )
 
-  return { open, handleClose, handleOpen, message, type, handleOpenFromEvent }
+  return { open, handleClose, handleOpen, message, messageType, handleOpenFromEvent }
 }
 
 export const UseSnackbarUI = () => {

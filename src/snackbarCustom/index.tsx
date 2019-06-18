@@ -31,15 +31,15 @@ interface ISnackbar {
   handleClose: () => void
   handleOpen: (message: string, warning?: boolean) => void
   message: string
-  type: string
+  messageType: string
 }
 
 const CustomSnackbarContent = (props: ISnackbar) => {
-  const { handleClose, message, type } = props
+  const { handleClose, message, messageType } = props
   const classes = useStyles()
   const getType = React.useCallback(
-    type => {
-      switch (type) {
+    messageType => {
+      switch (messageType) {
         case 'success':
           return classes.success
         case 'warning':
@@ -57,7 +57,7 @@ const CustomSnackbarContent = (props: ISnackbar) => {
   return (
     <SnackbarContent
       key={message}
-      className={getType(type)}
+      className={getType(messageType)}
       aria-describedby="client-snackbar"
       message={
         <span id="client-snackbar" className={classes.message}>
