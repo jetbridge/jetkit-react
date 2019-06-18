@@ -1,24 +1,24 @@
 import * as React from 'react'
-import SnackbarCustom from '.'
+import SnackbarCustom, { IMessageType } from '.'
 
 export const SNACKBAR_NOTIF_EVENT = 'JBSnackbarNotify'
 
 interface SnackbarNotificationEvent extends Event {
   detail?: {
     message: string
-    messageType: string
+    messageType: IMessageType
   }
 }
 interface Options extends Event {
   detail?: {
     message: string
-    messageType: string
+    messageType: IMessageType
   }
 }
 
 const useSnackbar = () => {
   const [open, toggleOpen] = React.useState<boolean>(false)
-  const [messageType, setType] = React.useState<string>('')
+  const [messageType, setType] = React.useState<IMessageType>('info')
   const [message, setMessage] = React.useState<string>('')
   const handleClose = React.useCallback(() => {
     toggleOpen(false)

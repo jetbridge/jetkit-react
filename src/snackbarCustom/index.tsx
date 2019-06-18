@@ -26,12 +26,14 @@ const useStyles = makeStyles({
   },
 })
 
+export type IMessageType = 'success' | 'warning' | 'info' | 'error'
+
 interface ISnackbar {
   open: boolean
   handleClose: () => void
   handleOpen: (message: string, warning?: boolean) => void
   message: string
-  messageType: string
+  messageType: IMessageType
 }
 
 const CustomSnackbarContent = (props: ISnackbar) => {
@@ -85,9 +87,6 @@ const SnackbarCustom = (props: ISnackbar) => {
       open={open}
       autoHideDuration={6000}
       onClose={handleClose}
-      ContentProps={{
-        'aria-describedby': 'message-id',
-      }}
       action={[
         <div key="undo">
           ,
