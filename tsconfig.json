@@ -1,22 +1,22 @@
 {
-    "compilerOptions": {
-        "module": "es2015",
-        "target": "es2015",
-        "lib": ["dom", "esnext"],
-        "sourceMap": true,
-        "jsx": "react",
-        "declaration": true,
-        "declarationDir": "./build",
-        "outDir": "./build",
-        "forceConsistentCasingInFileNames": true,
-        "noImplicitReturns": true,
-        "noImplicitThis": true,
-        "noImplicitAny": false,
-        "strict": true,
-        "strictNullChecks": true,
-        "moduleResolution": "node",
-        "extendedDiagnostics": false
-    },
-    "include": ["src/**/*"],
-    "exclude": ["node_modules", "build"]
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "esnext",
+    "lib": ["dom", "esnext"],
+    "sourceMap": true,
+    "jsx": "react",
+    "declaration": true,
+    "declarationDir": "./build",
+    "outDir": "./build",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": false,
+    "strict": true,
+    "strictNullChecks": true,
+    "moduleResolution": "node",
+    "extendedDiagnostics": false
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "build"]
 }
