@@ -1,1 +1,1 @@
-/// <reference types="react-scripts" />
+/// <reference types="jetbridge-react-scripts" />
