@@ -29,7 +29,7 @@
     "lint": "eslint src/**/*.ts src/**/*.tsx",
     "fix": "eslint --fix src/**/*.ts src/**/*.tsx",
     "storybook": "cd component-library && yarn && yarn storybook",
-    "postinstall": "tsc"
+    "postinstall": "tsc || echo done"
   },
   "husky": {
     "hooks": {
