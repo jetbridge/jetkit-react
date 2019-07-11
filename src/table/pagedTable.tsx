@@ -1,6 +1,5 @@
 import * as React from 'react'
 import Table from '@material-ui/core/Table'
-import Paper from '@material-ui/core/Paper'
 import TablePagination from '@material-ui/core/TablePagination'
 import TableFooter from '@material-ui/core/TableFooter'
 import { TableRow, TableBody } from '@material-ui/core'
@@ -54,7 +53,6 @@ export const PagedDataContext = React.createContext<IPagedDataContext>({ reloadD
 
 export function PagedTable<T>({
   header,
-  paperClassName,
   tableClassName,
   renderRow,
   emptyRowText,
@@ -82,32 +80,30 @@ export function PagedTable<T>({
 
   return (
     <PagedDataContext.Provider value={pagedDataContext}>
-      <Paper elevation={2} className={paperClassName}>
-        <Table className={tableClassName}>
-          {header ? header : null}
-          <TableBody data-testid="paged-body">
-            {rowsToDisplay && rowsToDisplay.length ? (
-              rowsToDisplay
-            ) : (
-              <EmptyTableRow colSpan={columnsSpan} rowText={emptyRowText} />
-            )}
-          </TableBody>
+      <Table className={tableClassName}>
+        {header ? header : null}
+        <TableBody data-testid="paged-body">
+          {rowsToDisplay && rowsToDisplay.length ? (
+            rowsToDisplay
+          ) : (
+            <EmptyTableRow colSpan={columnsSpan} rowText={emptyRowText} />
+          )}
+        </TableBody>
 
-          <TableFooter>
-            <TableRow>
-              <TablePagination
-                rowsPerPageOptions={[15, 25, 50]}
-                colSpan={columnsSpan}
-                count={totalRows}
-                rowsPerPage={pageSize}
-                page={page}
-                onChangePage={handleChangePage}
-                onChangeRowsPerPage={handleChangeRowsPerPage}
-              />
-            </TableRow>
-          </TableFooter>
-        </Table>
-      </Paper>
+        <TableFooter>
+          <TableRow>
+            <TablePagination
+              rowsPerPageOptions={[15, 25, 50]}
+              colSpan={columnsSpan}
+              count={totalRows}
+              rowsPerPage={pageSize}
+              page={page}
+              onChangePage={handleChangePage}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
+          </TableRow>
+        </TableFooter>
+      </Table>
     </PagedDataContext.Provider>
   )
 }
