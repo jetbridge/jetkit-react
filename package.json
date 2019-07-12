@@ -17,9 +17,9 @@
     "@material-ui/icons": "^4.2.1",
     "@material-ui/styles": "^4.1.2",
     "axios": "^0.19.0",
+    "jetbridge-react-scripts": "latest",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "jetbridge-react-scripts": "latest"
+    "react-dom": "^16.8.6"
   },
   "scripts": {
     "test-ci": "CI=1 react-scripts test",
@@ -59,6 +59,8 @@
     "@babel/core": "^7.4.5",
     "@material-ui/core": "^4.1.1",
     "@material-ui/icons": "^3.0.2",
+    "@testing-library/jest-dom": "^4.0.0",
+    "@testing-library/react": "^8.0.4",
     "@types/jest": "^24.0.13",
     "@types/jsonwebtoken": "^8.3.2",
     "@types/material-ui": "^0.21.6",
@@ -83,7 +85,7 @@
     "prettier": "^1.17.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "^3.0.1"
+    "jetbridge-react-scripts": "latest"
   },
   "files": [
     "build"
