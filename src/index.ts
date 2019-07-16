@@ -1,3 +1,4 @@
+import { IPaginatedRequest } from './apiClient/paginated';
 import { IMenuSection } from './types'
 import { apiClient } from './apiClient/index'
 import LoginScreen from './LoginScreen'
@@ -33,5 +34,6 @@ export {
   notify,
   UseSnackbarUI,
   usePagedTable,
-  PagedTable
+  PagedTable,
+  IPaginatedRequest
 }
