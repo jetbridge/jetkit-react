@@ -1,10 +1,13 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "esnext",
     "target": "esnext",
-    "lib": ["dom", "esnext"],
+    "lib": [
+      "dom",
+      "esnext"
+    ],
     "sourceMap": true,
-    "jsx": "react",
+    "jsx": "preserve",
     "declaration": true,
     "declarationDir": "./build",
     "outDir": "./build",
@@ -15,8 +18,20 @@
     "strict": true,
     "strictNullChecks": true,
     "moduleResolution": "node",
-    "extendedDiagnostics": false
+    "extendedDiagnostics": false,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "build"]
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "build"
+  ]
 }

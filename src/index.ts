@@ -7,6 +7,8 @@ import { authReducer, IAuthenticatedApplicationState, authenticate, IUser, IUser
 import snackbarCustom from './snackbarCustom'
 import notify from './snackbarCustom/notify'
 import useSnackbar, { UseSnackbarUI } from './snackbarCustom/useSnackbar'
+import usePagedTable from './table/pagedTable';
+import { PagedTable } from './table/pagedTable';
 
 // exporting AuthRedux as a separate entity
 // TODO: add more documentation and interfaces
@@ -30,4 +32,6 @@ export {
   useSnackbar,
   notify,
   UseSnackbarUI,
+  usePagedTable,
+  PagedTable
 }
