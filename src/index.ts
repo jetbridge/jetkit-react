@@ -35,5 +35,5 @@ export {
   UseSnackbarUI,
   usePagedTable,
   PagedTable,
-  IPaginatedRequest
+  IPaginatedRequest,
 }
