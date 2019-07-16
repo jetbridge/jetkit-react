@@ -117,6 +117,7 @@ function usePagedTable<T>(props: IUsePagedTableProps<T>): IPagedTableHook<T> {
 
   const [page, setPage] = React.useState(0)
   const [pageSize, setPageSize] = React.useState(25)
+  const [error, setError] = React.useState<any>(null)
   const [rows, setRows] = React.useState<T[]>([])
   const [totalRows, setTotalRows] = React.useState(0)
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
@@ -134,15 +135,17 @@ function usePagedTable<T>(props: IUsePagedTableProps<T>): IPagedTableHook<T> {
       // TablePagination is zero-indexed, API is not
       if (res.page) setPage(res.page - 1)
       else setPage(0)
+    } catch (err) {
+      setError(err)
     } finally {
       setIsLoading(false)
     }
-  }, [apiCall, page, pageSize, queryParams, setIsLoading])
+  }, [apiCall, page, pageSize, queryParams, setIsLoading, setError])
 
   // load on component mount
   React.useEffect(() => {
-    if (autoLoad) loadAPI()
-  }, [loadAPI, autoLoad])
+    if (autoLoad && !error) loadAPI()
+  }, [loadAPI, autoLoad, error])
 
   // pagination controls callback
   const handleChangePage = React.useCallback((event: unknown, newPage: number) => setPage(newPage), [])
