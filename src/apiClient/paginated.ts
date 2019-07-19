@@ -26,16 +26,14 @@ export interface IPaginatedRequest {
 /**
  * Returns a function that performs a paginated API request.
  */
-export const requestPaginated = <ResponseT>({ url, method = 'get' }: IAPIDescriptor) => async ({
-  page,
-  pageSize,
-  queryParams = {},
-}: IPaginatedRequest): Promise<IPaginatedResponse<ResponseT>> => {
+export const requestPaginated = <ResponseT>({ url, method = 'get' }: IAPIDescriptor) => (queryParams = {}) => async (
+  paginatedRequest: IPaginatedRequest
+): Promise<IPaginatedResponse<ResponseT>> => {
   // GET only
   if (method !== 'get') throw new Error('Only GET method is supported for paginated APIs right now.')
 
   // construct pagination params
-  const paginationParams = { page, page_size: pageSize }
+  const paginationParams = { page: paginatedRequest.page, page_size: paginatedRequest.pageSize }
   const response = await apiClient.get<ResponseT>(url, { params: { ...paginationParams, ...queryParams } })
 
   // pagination info lives in response header
@@ -45,5 +43,8 @@ export const requestPaginated = <ResponseT>({ url, method = 'get' }: IAPIDescrip
     rows: response.data,
   }
 }
+// for typing requestPaginated
+export type FilterableAPICall<T> = (filter?: object) => (req: IPaginatedRequest) => Promise<IPaginatedResponse<T[]>>
+
 // for adding types to wrappers of requestPaginated
 export type PaginatedRequestFunc<ResponseT> = (req: IPaginatedRequest) => Promise<IPaginatedResponse<ResponseT>>
