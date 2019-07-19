@@ -10,6 +10,7 @@ import notify from './snackbarCustom/notify'
 import useSnackbar, { UseSnackbarUI } from './snackbarCustom/useSnackbar'
 import usePagedTable from './table/pagedTable'
 import { PagedTable } from './table/pagedTable'
+import { requestPaginated, FilterableAPICall } from './apiClient/paginated'
 
 export {
   LoginScreen,
@@ -27,4 +28,6 @@ export {
   PagedTable,
   IPaginatedRequest,
   IPaginatedResponse,
+  FilterableAPICall,
+  requestPaginated,
 }
