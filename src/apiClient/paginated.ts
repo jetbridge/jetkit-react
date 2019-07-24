@@ -37,13 +37,10 @@ export const requestPaginated = <ResponseT>({ url, method = 'get' }: IAPIDescrip
   const response = await apiClient.get<ResponseT>(url, { params: { ...paginationParams, ...queryParams } })
 
   // pagination info lives in response header
-  console.log('=====')
-  console.log(url)
-  console.log('---------------')
-  console.log(response.headers['x-pagination'])
-  console.log('---------------')
-  console.log(response.headers)
-  console.log('---------------')
+
+  if (!response.headers['x-pagination']) {
+    throw new Error('No pagination header, make sure that endpoint is paginated check CORS settings')
+  }
   const pagination: Pagination = JSON.parse(response.headers['x-pagination'])
   return {
     ...pagination,
