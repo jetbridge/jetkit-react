@@ -37,6 +37,8 @@ export const requestPaginated = <ResponseT>({ url, method = 'get' }: IAPIDescrip
   const response = await apiClient.get<ResponseT>(url, { params: { ...paginationParams, ...queryParams } })
 
   // pagination info lives in response header
+  console.log('=====')
+  console.log(url)
   console.log('---------------')
   console.log(response.headers['x-pagination'])
   console.log('---------------')
