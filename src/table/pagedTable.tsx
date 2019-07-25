@@ -14,7 +14,7 @@ export interface IUsePagedTableProps<T> {
 }
 
 // data passed from hook to component
-interface IPagedTableImpl<T> {
+export interface IPagedTableImpl<T> {
   rows: T[]
   pagedDataContext: IPagedDataContext
   totalRows: number

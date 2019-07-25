@@ -9,7 +9,7 @@ import snackbarCustom from './snackbarCustom'
 import notify from './snackbarCustom/notify'
 import useSnackbar, { UseSnackbarUI } from './snackbarCustom/useSnackbar'
 import usePagedTable from './table/pagedTable'
-import { PagedTable, IPagedTableHook } from './table/pagedTable'
+import { PagedTable, IPagedTableHook, IPagedTableImpl, IPagedTableProps } from './table/pagedTable'
 import { requestPaginated, FilterableAPICall } from './apiClient/paginated'
 
 export {
@@ -31,4 +31,6 @@ export {
   FilterableAPICall,
   requestPaginated,
   IPagedTableHook,
+  IPagedTableImpl,
+  IPagedTableProps,
 }
