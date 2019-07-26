@@ -2225,10 +2225,10 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.8.0.tgz#f0e003d9ca9e7f59c7a508945d7b2ef9a04a542f"
   integrity sha512-ReZxvNHIOv88FlT7rxcXIIC0fPt4KZqZbOlivyWtXLt8ESx84zd3kMC6iK5jVeS2qt+g7ftS7ye4fi06X5rtRQ==
 
-axios-jwt@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/axios-jwt/-/axios-jwt-1.0.4.tgz#1fce05a96d716f4551bba89561d4f4551a59f1e0"
-  integrity sha512-NWxxmjdjwNXKc6PydY+6PMxIopKqNwFRBmIBMC2p7YCcfLjN6SLfGXMhBYNvQsmdNm9xwFFkP+U3FfTbEiCixQ==
+axios-jwt@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/axios-jwt/-/axios-jwt-1.0.6.tgz#390ca9842b1da0cbc207563d1f0dbf288e0dd524"
+  integrity sha512-zoT9dvp0JZSdCTq+kktnDf3r1zodpY2GP+idExG0h3II8qMg2DMhLEt/lNOTBfhvL4FINLsQGe8uee3+/bg0hw==
   dependencies:
     jsonwebtoken "^8.5.1"
 
