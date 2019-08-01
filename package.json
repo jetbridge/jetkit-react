@@ -1,6 +1,6 @@
 {
   "name": "@jetbridge/core",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "module": "build/index.js",
   "main": "build/index.js",
   "types": "build/index.d.ts",
