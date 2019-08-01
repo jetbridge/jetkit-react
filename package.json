@@ -1,11 +1,11 @@
 {
   "name": "@jetbridge/core",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "module": "build/index.js",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "dependencies": {
-    "axios-jwt": "^1.0.6",
+    "axios-jwt": "^1.1.0",
     "classnames": "^2.2.6",
     "jsonwebtoken": "^8.5.1",
     "redux": "^4.0.1",

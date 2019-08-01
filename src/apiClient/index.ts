@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useAuthTokenInterceptor } from 'axios-jwt'
-import { IAuthTokens, TokenRefreshRequest } from 'axios-jwt'
+import { IAuthTokens, TokenRefreshRequest, refreshTokenIfNeeded as ajwtRefreshTokenIfNeeded } from 'axios-jwt'
 
 // https://facebook.github.io/create-react-app/docs/adding-custom-environment-variables
 const BASE_URL = process.env.REACT_APP_BASE_URL
@@ -59,5 +59,7 @@ export const requestRefresh: TokenRefreshRequest = async (refreshToken: string):
 
 // JWT/refresh interceptor
 useAuthTokenInterceptor(apiClient, { requestRefresh })
+
+export const refreshTokenIfNeeded = async () => ajwtRefreshTokenIfNeeded(requestRefresh)
 
 export default apiClient
