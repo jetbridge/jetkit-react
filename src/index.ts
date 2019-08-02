@@ -1,6 +1,6 @@
 import { IPaginatedRequest, IPaginatedResponse } from './apiClient/paginated'
 import { IMenuSection } from './types'
-import { apiClient, requestRefresh } from './apiClient/index'
+import { apiClient, requestRefresh, refreshTokenIfNeeded } from './apiClient/index'
 import LoginScreen from './LoginScreen'
 import Menu from './menu'
 import authService from './service/auth'
@@ -35,4 +35,5 @@ export {
   IPagedTableProps,
   PagedDataContext,
   requestRefresh,
+  refreshTokenIfNeeded,
 }
