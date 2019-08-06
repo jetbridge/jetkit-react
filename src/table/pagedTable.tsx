@@ -32,6 +32,7 @@ export interface IPagedTableProps<T> extends IPagedTableImpl<T> {
   renderRow: (data: T) => React.ReactNode
   header?: React.ReactElement
   emptyRowText?: string
+  footer?: React.ReactNode
 }
 
 // hook return value
@@ -64,6 +65,7 @@ export function PagedTable<T>({
   handleChangePage,
   handleChangeRowsPerPage,
   colSpan,
+  footer,
 }: IPagedTableProps<T>) {
   // render rows
   const rowsToDisplay = React.useMemo(() => rows.map(data => renderRow(data)), [rows, renderRow])
@@ -92,15 +94,19 @@ export function PagedTable<T>({
 
         <TableFooter>
           <TableRow>
-            <TablePagination
-              rowsPerPageOptions={[15, 25, 50]}
-              colSpan={columnsSpan}
-              count={totalRows}
-              rowsPerPage={pageSize}
-              page={page}
-              onChangePage={handleChangePage}
-              onChangeRowsPerPage={handleChangeRowsPerPage}
-            />
+            {footer ? (
+              footer
+            ) : (
+              <TablePagination
+                rowsPerPageOptions={[15, 25, 50]}
+                colSpan={columnsSpan}
+                count={totalRows}
+                rowsPerPage={pageSize}
+                page={page}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+              />
+            )}
           </TableRow>
         </TableFooter>
       </Table>
