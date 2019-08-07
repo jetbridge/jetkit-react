@@ -8,6 +8,7 @@
     "axios-jwt": "^1.1.0",
     "classnames": "^2.2.6",
     "jsonwebtoken": "^8.5.1",
+    "react-router": "^5.0.1",
     "redux": "^4.0.1",
     "typesafe-actions": "^4.2.1",
     "typescript": "3.4.5"
@@ -19,7 +20,8 @@
     "axios": "^0.19.0",
     "jetbridge-react-scripts": "latest",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-router": "^5.0.1"
   },
   "scripts": {
     "test-ci": "CI=1 react-scripts test",
@@ -81,11 +83,11 @@
     "eslint-plugin-react": "^7.13.0",
     "eslint-plugin-react-hooks": "^1.6.0",
     "husky": "^2.4.1",
+    "jetbridge-react-scripts": "latest",
     "lint-staged": "^8.1.7",
     "prettier": "^1.17.1",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "jetbridge-react-scripts": "latest"
+    "react-dom": "^16.8.6"
   },
   "files": [
     "build"

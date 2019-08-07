@@ -11,6 +11,7 @@ import useSnackbar, { UseSnackbarUI } from './snackbarCustom/useSnackbar'
 import usePagedTable from './table/pagedTable'
 import { PagedTable, IPagedTableHook, IPagedTableImpl, IPagedTableProps, PagedDataContext } from './table/pagedTable'
 import { requestPaginated, FilterableAPICall } from './apiClient/paginated'
+import PrivateRoute from './privateRoute'
 
 export {
   LoginScreen,
@@ -35,5 +36,6 @@ export {
   IPagedTableProps,
   PagedDataContext,
   requestRefresh,
+  PrivateRoute,
   refreshTokenIfNeeded,
 }
