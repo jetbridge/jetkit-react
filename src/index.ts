@@ -1,3 +1,4 @@
+import { handleError } from './errorHandler/index'
 import { IPaginatedRequest, IPaginatedResponse } from './apiClient/paginated'
 import { IMenuSection } from './types'
 import { apiClient, requestRefresh, refreshTokenIfNeeded } from './apiClient/index'
@@ -38,4 +39,5 @@ export {
   requestRefresh,
   PrivateRoute,
   refreshTokenIfNeeded,
+  handleError,
 }

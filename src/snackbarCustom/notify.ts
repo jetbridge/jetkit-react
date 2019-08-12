@@ -9,5 +9,9 @@ const notify = {
     const notifyEvent = new CustomEvent(SNACKBAR_NOTIF_EVENT, { detail: { message, messageType: 'warning' } })
     document.dispatchEvent(notifyEvent)
   },
+  error: (message: string = '') => {
+    const notifyEvent = new CustomEvent(SNACKBAR_NOTIF_EVENT, { detail: { message, type: 'error' } })
+    document.dispatchEvent(notifyEvent)
+  },
 }
 export default notify
