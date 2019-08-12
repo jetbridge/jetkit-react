@@ -1,5 +1,9 @@
 import * as React from 'react'
-import { Button, Icon, Snackbar, SnackbarContent } from '@material-ui/core'
+// import { Button, Icon, Snackbar, SnackbarContent } from '@material-ui/core'
+import Button from '@material-ui/core/Button'
+import Snackbar from '@material-ui/core/Snackbar'
+import SnackbarContent from '@material-ui/core/SnackbarContent'
+import CloseIcon from '@material-ui/icons/Close'
 import { makeStyles } from '@material-ui/styles'
 import amber from '@material-ui/core/colors/amber'
 import green from '@material-ui/core/colors/green'
@@ -67,9 +71,9 @@ const CustomSnackbarContent = (props: ISnackbar) => {
         </span>
       }
       action={[
-        <Icon key="close" onClick={handleClose}>
+        <CloseIcon key="close" onClick={handleClose}>
           close
-        </Icon>,
+        </CloseIcon>,
       ]}
     />
   )
@@ -85,7 +89,7 @@ const SnackbarCustom = (props: ISnackbar) => {
         horizontal: 'left',
       }}
       open={open}
-      autoHideDuration={6000}
+      autoHideDuration={4000}
       onClose={handleClose}
       action={[
         <div key="undo">
@@ -93,7 +97,7 @@ const SnackbarCustom = (props: ISnackbar) => {
           <Button color="secondary" size="small" onClick={handleClose}>
             UNDO
           </Button>
-          ,<Icon onClick={handleClose}>close</Icon>,
+          ,<CloseIcon onClick={handleClose}>close</CloseIcon>,
         </div>,
       ]}
     >
