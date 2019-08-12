@@ -12,7 +12,7 @@ import classNames from 'classnames'
 const useStyles = makeStyles({
   base: {
     display:'flex',
-    flexDirection: 'column-reverse'
+    flexDirection: 'row'
   },
   success: {
     backgroundColor: green[600],
