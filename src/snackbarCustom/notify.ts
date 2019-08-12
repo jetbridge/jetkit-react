@@ -10,7 +10,7 @@ const notify = {
     document.dispatchEvent(notifyEvent)
   },
   error: (message: string = '') => {
-    const notifyEvent = new CustomEvent(SNACKBAR_NOTIF_EVENT, { detail: { message, type: 'error' } })
+    const notifyEvent = new CustomEvent(SNACKBAR_NOTIF_EVENT, { detail: { message, messageType: 'error' } })
     document.dispatchEvent(notifyEvent)
   },
 }

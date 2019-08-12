@@ -7,8 +7,13 @@ import CloseIcon from '@material-ui/icons/Close'
 import { makeStyles } from '@material-ui/styles'
 import amber from '@material-ui/core/colors/amber'
 import green from '@material-ui/core/colors/green'
+import classNames from 'classnames'
 
 const useStyles = makeStyles({
+  base: {
+    display:'flex',
+    flexDirection: 'column-reverse'
+  },
   success: {
     backgroundColor: green[600],
   },
@@ -63,7 +68,7 @@ const CustomSnackbarContent = (props: ISnackbar) => {
   return (
     <SnackbarContent
       key={message}
-      className={getType(messageType)}
+      className={classNames(getType(messageType), classes.base)}
       aria-describedby="client-snackbar"
       message={
         <span id="client-snackbar" className={classes.message}>
@@ -85,11 +90,11 @@ const SnackbarCustom = (props: ISnackbar) => {
     <Snackbar
       key={props.message}
       anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'left',
+        vertical: 'top',
+        horizontal: 'right',
       }}
       open={open}
-      autoHideDuration={4000}
+      autoHideDuration={props.messageType === 'error' ? undefined : 4000}
       onClose={handleClose}
       action={[
         <div key="undo">
@@ -101,7 +106,7 @@ const SnackbarCustom = (props: ISnackbar) => {
         </div>,
       ]}
     >
-      <CustomSnackbarContent {...props} />
+      <CustomSnackbarContent {...props}/>
     </Snackbar>
   )
 }
