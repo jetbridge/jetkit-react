@@ -14,6 +14,7 @@ import { PagedTable, IPagedTableHook, IPagedTableImpl, IPagedTableProps, PagedDa
 import { requestPaginated, FilterableAPICall } from './apiClient/paginated'
 import PrivateRoute from './privateRoute'
 
+
 export {
   LoginScreen,
   apiClient,
@@ -40,4 +41,7 @@ export {
   PrivateRoute,
   refreshTokenIfNeeded,
   handleError,
+  getAccessToken,
+  isLoggedIn,
+  clearAuthTokens
 }
