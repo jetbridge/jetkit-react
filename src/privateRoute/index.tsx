@@ -7,7 +7,7 @@ interface IPrivateRotueProps extends RouteProps {
 }
 
 function PrivateRoute(props: IPrivateRotueProps) {
-  if (isLoggedIn) {
+  if (isLoggedIn()) {
     return <Route {...props} />
   }
   return <Redirect to={props.fallbackRoute} />
