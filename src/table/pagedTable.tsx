@@ -11,6 +11,7 @@ export interface IUsePagedTableProps<T> {
   queryParams?: object
   apiCall: (req: IPaginatedRequest) => Promise<IPaginatedResponse<T[]>>
   autoLoad?: boolean
+  defaultPageSize?: number
 }
 
 // data passed from hook to component
@@ -119,10 +120,10 @@ export function PagedTable<T>({
 //   }
 
 function usePagedTable<T>(props: IUsePagedTableProps<T>): IPagedTableHook<T> {
-  const { apiCall, queryParams, autoLoad = true } = props
+  const { apiCall, queryParams, autoLoad = true, defaultPageSize = 25 } = props
 
   const [page, setPage] = React.useState(0)
-  const [pageSize, setPageSize] = React.useState(25)
+  const [pageSize, setPageSize] = React.useState(defaultPageSize)
   const [error, setError] = React.useState<any>(null)
   const [rows, setRows] = React.useState<T[]>([])
   const [totalRows, setTotalRows] = React.useState(0)
