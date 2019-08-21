@@ -38,16 +38,7 @@ const TextFieldWithDebounce: React.FC<ITextFieldWIthDebounce> = textFieldProps =
     debouncedCallback(value)
   }
 
-  return (
-    <TextField
-      classes={classes}
-      margin="normal"
-      variant="outlined"
-      value={internalValue || ''}
-      onChange={handleChange}
-      {...props}
-    />
-  )
+  return <TextField classes={classes} margin="normal" value={internalValue || ''} onChange={handleChange} {...props} />
 }
 
 export default TextFieldWithDebounce
