@@ -14,7 +14,7 @@ import { PagedTable, IPagedTableHook, IPagedTableImpl, IPagedTableProps, PagedDa
 import { requestPaginated, FilterableAPICall } from './apiClient/paginated'
 import PrivateRoute from './privateRoute'
 import { isLoggedIn, clearAuthTokens, getAccessToken } from 'axios-jwt'
-import TextFieldWithDebounce from './textFields/TextFieldWithDebounce'
+import TextFieldWithDebounce from './TextFieldWithDebounce'
 
 export {
   LoginScreen,
