@@ -14,7 +14,7 @@ interface ITextFieldWIthDebounce extends BaseTextFieldProps {
 const TextFieldWithDebounce: React.FC<ITextFieldWIthDebounce> = textFieldProps => {
   const classes = useStyles(textFieldProps)
   const { value, onChange, debounceTimeout = 300, variant, ...props } = textFieldProps
-  const [internalValue, setValue] = React.useState<unknown>()
+  const [internalValue, setValue] = React.useState<string | number>()
   const [initialValueSet, setInitialValueSet] = React.useState<boolean>(false)
 
   React.useEffect(() => {
