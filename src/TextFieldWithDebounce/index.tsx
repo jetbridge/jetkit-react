@@ -1,19 +1,21 @@
 import * as React from 'react'
-import TextField, { BaseTextFieldProps } from '@material-ui/core/TextField'
+import TextField, { BaseTextFieldProps, TextFieldProps } from '@material-ui/core/TextField'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import { useDebouncedCallback } from 'use-debounce'
 
 const useStyles = makeStyles((theme: Theme) => createStyles({}))
 
+type IVariant = 'filled' | 'filled' | 'outlined'
 interface ITextFieldWIthDebounce extends BaseTextFieldProps {
   value: string | number
   onChange(event: React.ChangeEvent<HTMLInputElement>): void
   debounceTimeout?: number
+  variant?: 'filled' | 'filled' | 'outlined'
 }
 
 const TextFieldWithDebounce: React.FC<ITextFieldWIthDebounce> = textFieldProps => {
   const classes = useStyles(textFieldProps)
-  const { value, onChange, debounceTimeout = 300, variant, ...props } = textFieldProps
+  const { value, onChange, debounceTimeout = 300, ...props } = textFieldProps
   const [internalValue, setValue] = React.useState<string | number>()
   const [initialValueSet, setInitialValueSet] = React.useState<boolean>(false)
 
@@ -39,7 +41,37 @@ const TextFieldWithDebounce: React.FC<ITextFieldWIthDebounce> = textFieldProps =
     debouncedCallback(event)
   }
 
-  return <TextField classes={classes} margin="normal" value={internalValue || ''} onChange={handleChange} {...props} />
+  /**
+   * Hack to make 'props.variant' type safe
+   *
+   * See: https://github.com/mui-org/material-ui/issues/15697
+   */
+
+  const tsProps = (() => {
+    let tsVariant
+    switch (props.variant) {
+      case 'outlined': {
+        tsVariant = { variant: 'outlined' as 'outlined' }
+        break
+      }
+      case 'filled': {
+        tsVariant = { variant: 'filled' as 'filled' }
+        break
+      }
+      case undefined:
+      default: {
+        tsVariant = { variant: 'standard' as 'standard' }
+        break
+      }
+    }
+    const p = props
+    delete p.variant
+    return { ...p, ...tsVariant }
+  })()
+
+  return (
+    <TextField classes={classes} margin="normal" value={internalValue || ''} onChange={handleChange} {...tsProps} />
+  )
 }
 
 export default TextFieldWithDebounce
