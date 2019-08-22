@@ -25,17 +25,18 @@ const TextFieldWithDebounce: React.FC<ITextFieldWIthDebounce> = textFieldProps =
   }, [initialValueSet, value])
 
   const [debouncedCallback] = useDebouncedCallback(
-    value => {
-      onChange(value)
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      onChange(event)
     },
     // delay in ms
     debounceTimeout
   )
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.persist()
     const value = event.target.value
     setValue(value)
-    debouncedCallback(value)
+    debouncedCallback(event)
   }
 
   return <TextField classes={classes} margin="normal" value={internalValue || ''} onChange={handleChange} {...props} />

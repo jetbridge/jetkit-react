@@ -10,7 +10,7 @@ storiesOf('Input Fields', module).add('TextFieldWithDebounce', () =>
     }
     return (
       <div style={{ width: 500 }}>
-        <TextFieldWithDebounce onChange={handleChange} value={value} />
+        <TextFieldWithDebounce debounceTimeout={1000} onChange={handleChange} value={value} />
       </div>
     )
   })
