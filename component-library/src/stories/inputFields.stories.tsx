@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { storiesOf } from '@storybook/react'
-import TextFieldWithDebounce from '../../../src/TextFieldWithDebounce'
+import TextFieldWithDebounce from '../../../src/form/textFieldWithDebounce/index'
 
 storiesOf('Input Fields', module).add('TextFieldWithDebounce', () =>
   React.createElement(() => {
