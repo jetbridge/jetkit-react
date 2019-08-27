@@ -1,9 +1,9 @@
 import { useDropzone } from 'react-dropzone'
 import * as React from 'react'
 import { makeStyles } from '@material-ui/styles'
-import Icon from '@material-ui/core/Icon'
 import classNames from 'classnames'
-import CloudUpload from '@material-ui/icons/CloudUpload'
+import DropIcon from '@material-ui/icons/CloudUpload'
+import DragActiveIcon from '@material-ui/icons/CloudQueue'
 import { IFileDropzone } from './useFileDropzone'
 
 const useStyles = makeStyles({
@@ -13,6 +13,7 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    minHeight: 92,
   },
   dropzoneContainerFullSize: {
     height: 200,
@@ -23,7 +24,7 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 4,
+    padding: 12,
   },
   uploadPromptContainerFullSize: {
     flexDirection: 'column',
@@ -195,19 +196,15 @@ const FileDropzone = (props: IFileDropzoneProps) => {
               <div
                 className={classNames(classes.uploadPromptContainer, fullSize && classes.uploadPromptContainerFullSize)}
               >
-                {isDragActive ? <Icon className={classes.icon}>cloud_download</Icon> : <CloudUpload />}
+                {isDragActive ? <DragActiveIcon className={classes.icon} /> : <DropIcon className={classes.icon} />}
                 <div className={classNames(!fullSize && classes.messageBlock)}>
-                  <h4 className={classNames(classes.heading, fullSize && classes.textFullSize)}>
-                    {prompt || 'Upload your file here'}
-                  </h4>
+                  <h4 className={classNames(classes.heading, fullSize && classes.textFullSize)}>{prompt || ''}</h4>
                   {isDragActive ? (
-                    <p className={classNames(classes.text, fullSize && classes.textFullSize)}>
-                      Drop the files here ...
-                    </p>
+                    <p className={classNames(classes.text, fullSize && classes.textFullSize)}>Drop file here</p>
                   ) : (
                     <p className={classNames(classes.text, fullSize && classes.textFullSize)}>
-                      Drag n&apos; drop a file here,
-                      <br /> or click to select file.
+                      Drag and drop a file here,
+                      <br /> or click to select a file.
                     </p>
                   )}
                 </div>
