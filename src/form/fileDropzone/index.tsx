@@ -127,7 +127,7 @@ const useStyles = makeStyles({
 
 export interface IFileDropzoneProps {
   value?: IFileDropzone
-  image: boolean
+  isImage?: boolean
   title?: string
   fileName?: string
   prompt?: string
@@ -143,7 +143,7 @@ const FileDropzone = (props: IFileDropzoneProps) => {
   const {
     value,
     onDrop,
-    image,
+    isImage,
     title,
     fileName,
     prompt,
@@ -210,8 +210,8 @@ const FileDropzone = (props: IFileDropzoneProps) => {
                 </div>
               </div>
             )}
-            {value && !image && <aside className={classes.thumbsContainer}>{fileName}</aside>}
-            {image && <aside className={classes.thumbsContainer}>{thumbs()}</aside>}
+            {value && !isImage && <aside className={classes.thumbsContainer}>{fileName}</aside>}
+            {isImage && <aside className={classes.thumbsContainer}>{thumbs()}</aside>}
           </div>
         </div>
       </div>
