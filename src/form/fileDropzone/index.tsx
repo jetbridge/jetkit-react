@@ -130,7 +130,7 @@ export interface IFileDropzoneProps extends DropzoneOptions {
   file?: IFileDropzone
   isImage?: boolean
   title?: string
-  fileName?: string
+  filename?: string
   prompt?: string
   onDrop: (files: IFileDropzone[]) => void
   previewUrl?: string
@@ -146,7 +146,7 @@ const FileDropzone = (props: IFileDropzoneProps) => {
     onDrop,
     isImage,
     title,
-    fileName,
+    filename,
     prompt,
     previewUrl,
     uploadProgress,
@@ -186,10 +186,10 @@ const FileDropzone = (props: IFileDropzoneProps) => {
 
   // calculate file name to display
   const filenameDisplay = React.useMemo(() => {
-    if (fileName) return fileName
+    if (filename) return filename
     if (file && file.name) return file.name
     return ''
-  }, [fileName, file])
+  }, [filename, file])
 
   return (
     <div className={classNames({ [classes.disabled]: disabled, [classes.notEditable]: !editable })}>
@@ -221,7 +221,7 @@ const FileDropzone = (props: IFileDropzoneProps) => {
                 </div>
               </div>
             )}
-            {filenameDisplay && !isImage && <aside className={classes.thumbsContainer}>{filenameDisplay}</aside>}
+            {filenameDisplay && !isImage ? <aside className={classes.thumbsContainer}>{filenameDisplay}</aside> : null}
             {isImage && <aside className={classes.thumbsContainer}>{thumbs()}</aside>}
           </div>
         </div>
