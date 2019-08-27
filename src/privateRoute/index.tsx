@@ -2,11 +2,11 @@ import * as React from 'react'
 import { Route, Redirect, RouteProps } from 'react-router'
 import { isLoggedIn } from 'axios-jwt'
 
-interface IPrivateRotueProps extends RouteProps {
+interface IPrivateRouteProps extends RouteProps {
   fallbackRoute: string
 }
 
-function PrivateRoute(props: IPrivateRotueProps) {
+function PrivateRoute(props: IPrivateRouteProps) {
   if (isLoggedIn()) {
     return <Route {...props} />
   }

@@ -5,26 +5,27 @@ export interface PrepareUploadResponse {
   headers: object
 }
 
-export interface UploadFileToS3Args<MT> {
-  model: MT
+export interface UploadFileToS3Args<MT = {}> {
+  model?: MT
   file: File
   onProgress?: (evt: ProgressEvent) => void
 }
 
-export type UploadRequestClass<MT> = new (file: File, model: MT) => UploadRequest<MT>
+export type UploadRequestClass<MT = {}> = new (file: File, model?: MT) => UploadRequest<MT>
 
-export abstract class UploadRequest<MT> {
+export abstract class UploadRequest<MT = {}> {
   /**
    *
    * @param file File object to upload.
    * @param model
    */
-  protected abstract async prepareUploadRequest(file: File, model: MT): Promise<PrepareUploadResponse>
+  protected abstract async prepareUploadRequest(file: File, model?: MT): Promise<PrepareUploadResponse>
+  protected abstract async prepareUploadRequest(file: File): Promise<PrepareUploadResponse>
 
-  public model: MT
+  public model?: MT
   public file: File
 
-  public constructor(file: File, model: MT) {
+  public constructor(file: File, model?: MT) {
     this.model = model
     this.file = file
   }

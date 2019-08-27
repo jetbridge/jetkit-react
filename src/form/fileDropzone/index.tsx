@@ -3,9 +3,8 @@ import * as React from 'react'
 import { makeStyles } from '@material-ui/styles'
 import Icon from '@material-ui/core/Icon'
 import classNames from 'classnames'
-
+import CloudUpload from '@material-ui/icons/CloudUpload'
 import { IFileDropzone } from './useFileDropzone'
-import { FileCloudUpload } from 'material-ui/svg-icons'
 
 const useStyles = makeStyles({
   dropzoneContainer: {
@@ -196,7 +195,7 @@ const FileDropzone = (props: IFileDropzoneProps) => {
               <div
                 className={classNames(classes.uploadPromptContainer, fullSize && classes.uploadPromptContainerFullSize)}
               >
-                {isDragActive ? <Icon className={classes.icon}>cloud_download</Icon> : <FileCloudUpload />}
+                {isDragActive ? <Icon className={classes.icon}>cloud_download</Icon> : <CloudUpload />}
                 <div className={classNames(!fullSize && classes.messageBlock)}>
                   <h4 className={classNames(classes.heading, fullSize && classes.textFullSize)}>
                     {prompt || 'Upload your file here'}

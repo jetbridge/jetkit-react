@@ -11,7 +11,6 @@ const useStyles = makeStyles({
     flexDirection: 'column',
   },
   buttonWrapper: {
-    // marginTop: '1rem',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -22,9 +21,9 @@ const useStyles = makeStyles({
   },
 })
 
-export interface IAssetUpload<MT> {
+export interface IAssetUpload<MT = {}> {
   model?: MT
-  UploadRequest: UploadRequestClass<MT>
+  uploadRequest: UploadRequestClass<MT>
   onBeforeUpload?: (file?: IFileDropzone) => Promise<MT | undefined> // should return model to proceed or false to abort upload
   onUpdateComplete?: (args: UploadFileToS3Args<MT>) => void
   onError?: (error: Error) => void
@@ -49,9 +48,9 @@ export interface IAssetUpload<MT> {
  *
  * @param MT Type of model related to this asset.
  */
-function AssetUpload<MT>({
+function AssetUpload<MT = {}>({
   model,
-  UploadRequest,
+  uploadRequest,
   onBeforeUpload,
   onUpdateComplete,
   onError,
@@ -109,7 +108,7 @@ function AssetUpload<MT>({
     if (!modelToUpload || !file) throw new Error(`model must be set before initiating upload`)
 
     // do an API request to get our presigned upload url
-    const uploadReq = new UploadRequest(file, modelToUpload)
+    const uploadReq = new uploadRequest(file, modelToUpload)
 
     const handleProgress = (evt: ProgressEvent) => setUploadProgress(Math.ceil((evt.loaded / evt.total) * 100))
     setIsUploading(true)
@@ -132,7 +131,7 @@ function AssetUpload<MT>({
     setUploadProgress,
     onBeforeUpload,
     handleUploadComplete,
-    UploadRequest,
+    uploadRequest,
     onError,
   ])
   const classes = useStyles()
