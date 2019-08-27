@@ -9,6 +9,7 @@ import { IFileDropzone } from './useFileDropzone'
 const useStyles = makeStyles({
   dropzoneContainer: {
     borderRadius: 3,
+    minWidth: 266,
     position: 'relative',
     display: 'flex',
     justifyContent: 'center',
@@ -21,8 +22,8 @@ const useStyles = makeStyles({
     padding: '1rem',
   },
   uploadPromptContainer: {
+    minWidth: 266,
     display: 'flex',
-    justifyContent: 'center',
     alignItems: 'center',
     padding: 12,
   },
