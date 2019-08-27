@@ -189,7 +189,7 @@ const FileDropzone = (props: IFileDropzoneProps) => {
     if (fileName) return fileName
     if (file && file.name) return file.name
     return ''
-  })
+  }, [fileName, file])
 
   return (
     <div className={classNames({ [classes.disabled]: disabled, [classes.notEditable]: !editable })}>
