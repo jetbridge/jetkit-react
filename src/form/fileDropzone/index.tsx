@@ -1,4 +1,4 @@
-import { useDropzone } from 'react-dropzone'
+import { useDropzone, DropzoneOptions } from 'react-dropzone'
 import * as React from 'react'
 import { makeStyles } from '@material-ui/styles'
 import classNames from 'classnames'
@@ -125,7 +125,7 @@ const useStyles = makeStyles({
   },
 })
 
-export interface IFileDropzoneProps {
+export interface IFileDropzoneProps extends DropzoneOptions {
   value?: IFileDropzone
   isImage?: boolean
   title?: string
@@ -152,8 +152,11 @@ const FileDropzone = (props: IFileDropzoneProps) => {
     editable = true,
     fullSize,
     disabled,
+    ...dropzoneOptions
   } = props
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+
+  // react-dropzone
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, ...dropzoneOptions })
   const classes = useStyles(props)
 
   // render existing image preview if we have one and user hasn't selected a new file
