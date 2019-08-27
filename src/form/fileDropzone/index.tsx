@@ -127,7 +127,7 @@ const useStyles = makeStyles({
 })
 
 export interface IFileDropzoneProps extends DropzoneOptions {
-  value?: IFileDropzone
+  file?: IFileDropzone
   isImage?: boolean
   title?: string
   fileName?: string
@@ -142,7 +142,7 @@ export interface IFileDropzoneProps extends DropzoneOptions {
 
 const FileDropzone = (props: IFileDropzoneProps) => {
   const {
-    value,
+    file,
     onDrop,
     isImage,
     title,
@@ -162,16 +162,16 @@ const FileDropzone = (props: IFileDropzoneProps) => {
 
   // render existing image preview if we have one and user hasn't selected a new file
   const bgImage =
-    previewUrl && !value ? <img src={previewUrl} alt="Uploading..." className={classes.previewImg} /> : null
+    previewUrl && !file ? <img src={previewUrl} alt="Uploading..." className={classes.previewImg} /> : null
 
   // render preview of image about to be uploaded
   const thumbs = React.useCallback(() => {
     return (
       <div className={classes.thumb}>
         <div className={classes.thumbInner}>
-          {value && (
+          {file && (
             <React.Fragment>
-              <img src={value.preview} alt={value.name} className={classes.img} />
+              <img src={file.preview} alt={file.name} className={classes.img} />
               {uploadProgress && uploadProgress < 100 ? (
                 <div className={classes.thumbCover} style={{ height: `${100 - uploadProgress}%` }}>
                   &nbsp;
@@ -182,7 +182,14 @@ const FileDropzone = (props: IFileDropzoneProps) => {
         </div>
       </div>
     )
-  }, [value, classes, uploadProgress])
+  }, [file, classes, uploadProgress])
+
+  // calculate file name to display
+  const filenameDisplay = React.useMemo(() => {
+    if (fileName) return fileName
+    if (file && file.name) return file.name
+    return ''
+  })
 
   return (
     <div className={classNames({ [classes.disabled]: disabled, [classes.notEditable]: !editable })}>
@@ -196,7 +203,7 @@ const FileDropzone = (props: IFileDropzoneProps) => {
         <div style={{ zIndex: 2 }}>
           <input {...getInputProps()} />
           <div className={classNames(classes.dropzoneContent, fullSize && classes.dropzoneContentFullSize)}>
-            {!value && (
+            {!file && (
               <div
                 className={classNames(classes.uploadPromptContainer, fullSize && classes.uploadPromptContainerFullSize)}
               >
@@ -214,7 +221,7 @@ const FileDropzone = (props: IFileDropzoneProps) => {
                 </div>
               </div>
             )}
-            {value && !isImage && <aside className={classes.thumbsContainer}>{fileName}</aside>}
+            {filenameDisplay && !isImage && <aside className={classes.thumbsContainer}>{filenameDisplay}</aside>}
             {isImage && <aside className={classes.thumbsContainer}>{thumbs()}</aside>}
           </div>
         </div>
