@@ -1,15 +1,15 @@
 import { SNACKBAR_NOTIF_EVENT } from './useSnackbar'
 
 const notify = {
-  success: (message: string = 'Success') => {
+  success: (message = 'Success') => {
     const notifyEvent = new CustomEvent(SNACKBAR_NOTIF_EVENT, { detail: { message, messageType: 'success' } })
     document.dispatchEvent(notifyEvent)
   },
-  warning: (message: string = 'Error') => {
+  warning: (message = 'Error') => {
     const notifyEvent = new CustomEvent(SNACKBAR_NOTIF_EVENT, { detail: { message, messageType: 'warning' } })
     document.dispatchEvent(notifyEvent)
   },
-  error: (message: string = '') => {
+  error: (message = '') => {
     const notifyEvent = new CustomEvent(SNACKBAR_NOTIF_EVENT, { detail: { message, messageType: 'error' } })
     document.dispatchEvent(notifyEvent)
   },
