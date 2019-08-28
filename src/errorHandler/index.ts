@@ -5,6 +5,9 @@ export const handleError = (error: AxiosError, resourceName?: string) => {
   let message = 'Something went wrong. Please try again later.'
   const response = error.response
   if (response) {
+    if (response.status === 401) {
+      message = "Unauthorized request"
+    }
     if (response.status === 404) {
       message = `${resourceName || 'Resource'} not found`
     } else if (response.data) {
