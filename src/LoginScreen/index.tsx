@@ -120,6 +120,9 @@ const LoginScreen: React.FunctionComponent<ILoginScreenProps> = ({
                     <form className={classes.inputWrapperStyle}>
                         <TextField
                             type="email"
+                            inputProps={{
+                                "data-testId":"email"
+                            }}
                             autoComplete="email"
                             className={`${classes.inputField} ${classes.emailInputField}`}
                             label={emailLabel}
@@ -130,6 +133,9 @@ const LoginScreen: React.FunctionComponent<ILoginScreenProps> = ({
                         <FormControl className={`${classes.inputField} ${classes.passwordInputField}`}>
                             <InputLabel htmlFor="adornment-password">Password</InputLabel>
                             <Input
+                                inputProps={{
+                                    "data-testId":"password"
+                                }}
                                 type={inputFields.showPassword ? 'text' : 'password'}
                                 autoComplete="password"
                                 {...passwordTextFieldProps}
@@ -149,7 +155,7 @@ const LoginScreen: React.FunctionComponent<ILoginScreenProps> = ({
                     </form>
                 </div>
             </div>
-            <Button className={classes.submitButton} onClick={onSubmitClick} {...submitButtonProps}>
+            <Button disabled={!inputFields.email || !inputFields.password } className={classes.submitButton} onClick={onSubmitClick} {...submitButtonProps}>
                 Submit
             </Button>
         </Card>
