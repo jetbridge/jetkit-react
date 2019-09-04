@@ -2,6 +2,7 @@ import * as React from 'react'
 import TextField, { BaseTextFieldProps, TextFieldProps } from '@material-ui/core/TextField'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import { useDebouncedCallback } from 'use-debounce'
+import toTitleCase from '../toTitleCase'
 
 const useStyles = makeStyles((theme: Theme) => createStyles({}))
 
@@ -11,6 +12,7 @@ interface ITextFieldWIthDebounce extends BaseTextFieldProps {
   onChange(event: React.ChangeEvent<HTMLInputElement>): void
   debounceTimeout?: number
   variant?: 'filled' | 'filled' | 'outlined'
+  titleCase?: boolean
 }
 
 const TextFieldWithDebounce: React.FC<ITextFieldWIthDebounce> = textFieldProps => {
@@ -36,7 +38,7 @@ const TextFieldWithDebounce: React.FC<ITextFieldWIthDebounce> = textFieldProps =
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.persist()
-    const value = event.target.value
+    const value = toTitleCase(event.target.value)
     setValue(value)
     debouncedCallback(event)
   }

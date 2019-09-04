@@ -15,12 +15,11 @@ import { requestPaginated, FilterableAPICall } from './apiClient/paginated'
 import PrivateRoute from './privateRoute'
 import { isLoggedIn, clearAuthTokens, getAccessToken } from 'axios-jwt'
 import TextFieldWithDebounce from './form/textFieldWithDebounce'
-
-// asset
 import { UploadFileToS3Args, UploadRequest, UploadRequestClass, PrepareUploadResponse } from './apiClient/asset'
 import AssetUpload, { IAssetUpload } from './form/assetUpload'
 import FileDropzone, { IFileDropzoneProps } from './form/fileDropzone'
 import { useDropzone } from './form/fileDropzone/useFileDropzone'
+import toTitleCase from './toTitleCase'
 
 export {
   LoginScreen,
@@ -52,6 +51,7 @@ export {
   isLoggedIn,
   clearAuthTokens,
   TextFieldWithDebounce,
+  toTitleCase,
   // asset
   UploadFileToS3Args,
   UploadRequest,
