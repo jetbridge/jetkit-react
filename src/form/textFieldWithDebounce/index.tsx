@@ -2,7 +2,7 @@ import * as React from 'react'
 import TextField, { BaseTextFieldProps, TextFieldProps } from '@material-ui/core/TextField'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import { useDebouncedCallback } from 'use-debounce'
-import toTitleCase from '../toTitleCase'
+import toTitleCase from '../../toTitleCase'
 
 const useStyles = makeStyles((theme: Theme) => createStyles({}))
 
