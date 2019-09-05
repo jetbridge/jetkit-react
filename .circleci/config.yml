@@ -31,10 +31,10 @@ jobs:
           name: ESLint
           command: |
             mkdir -p ~/reports
-            npm run lint --format junit --output-file ~/reports/eslint.xml
+            npm run lint -- --format junit --output-file ~/reports/eslint.xml
       - run:
           name: Run tests
-          command: npm run test --coverage --collectCoverage=true --runInBand --reporters=default --reporters=jest-junit
+          command: npm test -- --coverage --collectCoverage=true --runInBand --reporters=default --reporters=jest-junit
           environment:
             JEST_JUNIT_OUTPUT: 'reports/junit/js-test-results.xml'
       - store_test_results:
