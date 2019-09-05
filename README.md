@@ -1,4 +1,4 @@
-# JetKit
+# JetKit 🚀
 
 JetKit is a set of components and libraries for building web and mobile applications that work together to accelerate
 development and share common components without a lot of copy-pasting of code.
