@@ -33,7 +33,7 @@ describe('PagedTable', () => {
 
   it('renders without crashing', async () => {
     const fakeResponse = 'ok'
-    const apiCall: PaginatedRequestFunc<string[]> = req => Promise.resolve(fakePaginatedResponse(fakeResponse))
+    const apiCall: PaginatedRequestFunc<string[]> = () => Promise.resolve(fakePaginatedResponse(fakeResponse))
 
     const Table: React.FC = () => {
       const pagedTable = usePagedTable<string>({
