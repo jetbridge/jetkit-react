@@ -1,5 +1,5 @@
 {
-  "name": "@jetbridge/jetkit-react",
+  "name": "@jetkit/react",
   "version": "0.2.5",
   "module": "build/index.js",
   "main": "build/index.js",
@@ -36,7 +36,7 @@
     "start": "rm -rf build && tsc -w",
     "lint": "eslint src/**/*.ts src/**/*.tsx",
     "fix": "eslint --fix src/**/*.ts src/**/*.tsx",
-    "storybook": "cd component-library && yarn && yarn storybook",
+    "storybook": "cd component-library && npm i && npm run storybook",
     "prepare": "tsc",
     "pub": "npm version patch && npm publish"
   },

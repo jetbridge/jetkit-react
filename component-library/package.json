@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@jetbridge/frontend-core": "link:..",
+    "@jetkit/react": "link:..",
     "axios": "latest",
     "classnames": "latest",
     "jetbridge-react-scripts": "^1.0.0",
