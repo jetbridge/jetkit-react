@@ -30,8 +30,8 @@ jobs:
       - run:
           name: ESLint
           command: |
-            mkdir -p ~/reports
-            npm run lint -- --format junit --output-file ~/reports/eslint.xml
+            mkdir -p reports/junit
+            npm run lint -- --format junit --output-file reports/junit/eslint.xml
       - run:
           name: Run tests
           command: npm test -- --coverage --collectCoverage=true --runInBand --reporters=default --reporters=jest-junit
