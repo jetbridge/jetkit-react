@@ -41,7 +41,8 @@
     "fix": "eslint --fix src/**/*.ts src/**/*.tsx",
     "storybook": "cd component-library && yarn && yarn storybook",
     "prepare": "tsc",
-    "npm:login": "npm login --registry=https://npm.pkg.github.com --scope=@jetbridge"
+    "npm:login": "npm login --registry=https://npm.pkg.github.com --scope=@jetbridge",
+    "pub": "npm version patch && npm publish"
   },
   "husky": {
     "hooks": {

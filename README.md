@@ -16,5 +16,5 @@ yarn storybook
 
 ## Publishing Package
 
-1. (Authenticate to GitHub package registry)[https://help.github.com/en/articles/configuring-npm-for-use-with-github-package-registry#authenticating-to-github-package-registry]. You may need to generate an auth token to use as your password if using 2FA.
+1. [Authenticate to GitHub package registry](https://help.github.com/en/articles/configuring-npm-for-use-with-github-package-registry#authenticating-to-github-package-registry). You may need to generate an auth token to use as your password if using 2FA.
 2. `npm publish`
