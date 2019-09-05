@@ -1,9 +1,10 @@
 {
   "name": "@jetkit/react",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "module": "build/index.js",
   "main": "build/index.js",
   "types": "build/index.d.ts",
+  "private": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jetbridge/jetkit-react.git"
@@ -91,7 +92,8 @@
     "lint-staged": "^8.1.7",
     "prettier": "^1.17.1",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "webpack": "^4.35.0"
   },
   "files": [
     "build"
