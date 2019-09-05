@@ -38,7 +38,7 @@
     "fix": "eslint --fix src/**/*.ts src/**/*.tsx",
     "storybook": "cd component-library && npm i && npm run storybook",
     "prepare": "tsc",
-    "pub": "npm version patch && npm publish"
+    "vpub": "npm version patch && npm publish"
   },
   "husky": {
     "hooks": {
@@ -84,6 +84,7 @@
     "babel-eslint": "10.0.2",
     "babel-loader": "8.0.5",
     "docz": "^2.0.0-rc.1",
+    "eslint": "^6.3.0",
     "eslint-config-react-app": "^5.0.1",
     "husky": "^2.4.1",
     "jetbridge-react-scripts": "latest",
