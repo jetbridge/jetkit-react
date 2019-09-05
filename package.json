@@ -40,7 +40,8 @@
     "lint": "eslint src/**/*.ts src/**/*.tsx",
     "fix": "eslint --fix src/**/*.ts src/**/*.tsx",
     "storybook": "cd component-library && yarn && yarn storybook",
-    "prepare": "tsc"
+    "prepare": "tsc",
+    "npm:login": "npm login --registry=https://npm.pkg.github.com --scope=@jetbridge"
   },
   "husky": {
     "hooks": {
