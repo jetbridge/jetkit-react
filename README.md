@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/jetbridge/jetkit-react.svg?style=svg)](https://circleci.com/gh/jetbridge/jetkit-react)
+
 # JetKit 🚀
 
 JetKit is a set of components and libraries for building web and mobile applications that work together to accelerate
