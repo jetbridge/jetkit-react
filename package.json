@@ -1,15 +1,12 @@
 {
   "name": "@jetbridge/jetkit-react",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "module": "build/index.js",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jetbridge/jetkit-react.git"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
   },
   "dependencies": {
     "axios-jwt": "^1.1.0",
@@ -41,7 +38,6 @@
     "fix": "eslint --fix src/**/*.ts src/**/*.tsx",
     "storybook": "cd component-library && yarn && yarn storybook",
     "prepare": "tsc",
-    "npm:login": "npm login --registry=https://npm.pkg.github.com --scope=@jetbridge",
     "pub": "npm version patch && npm publish"
   },
   "husky": {
