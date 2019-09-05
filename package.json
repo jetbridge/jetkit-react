@@ -39,7 +39,7 @@
     "fix": "eslint --fix src/**/*.ts src/**/*.tsx",
     "storybook": "cd component-library && npm i && npm run storybook",
     "prepare": "tsc",
-    "vpub": "npm version patch && npm publish"
+    "vpub": "npm version patch && npm publish --access public"
   },
   "husky": {
     "hooks": {
