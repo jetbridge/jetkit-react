@@ -1,6 +1,6 @@
 const toTitleCase = (word: string): string => {
   let i: number, j: number, str: string
-  const lowers = []
+  const lowers: string[] = []
   str = word.replace(/([^\W_]+[^\s-]*) */g, function(txt) {
     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
   })

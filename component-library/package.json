@@ -3,34 +3,40 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@jetkit/react": "link:..",
+    "@jetkit/react": "file:..",
     "axios": "latest",
     "classnames": "latest",
-    "jetbridge-react-scripts": "^1.0.0",
+    "jetbridge-react-scripts": "^1.0.21",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "typescript": "3.4.5"
+    "typescript": "3.4.5",
+    "webpack": "^4.28.4"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
-    "@storybook/addon-actions": "latest",
+    "@storybook/addon-actions": "^5.1.11",
     "@storybook/addon-centered": "latest",
     "@storybook/addon-info": "latest",
-    "@storybook/addon-links": "latest",
-    "@storybook/addons": "latest",
-    "@storybook/react": "latest",
+    "@storybook/addon-links": "^5.1.11",
+    "@storybook/addons": "^5.1.11",
+    "@storybook/preset-typescript": "^1.1.0",
+    "@storybook/react": "^5.1.11",
+    "@types/classnames": "^2.2.9",
+    "@types/jest": "24.0.13",
     "@types/node": "latest",
     "@types/react": "latest",
-    "@types/jest": "24.0.13",
     "@types/react-dom": "16.8.4",
     "@types/storybook__react": "^4.0.2",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-loader": "^8.0.5",
     "eslint": "latest",
     "husky": "latest",
     "lint-staged": "latest",
     "prettier": "latest",
     "react-docgen-typescript-loader": "^3.1.1",
-    "storybook-addon-react-docgen": "^1.2.6"
+    "storybook-addon-react-docgen": "^1.2.6",
+    "ts-loader": "^6.0.4"
   },
   "husky": {
     "hooks": {
@@ -51,8 +57,8 @@
     "eject": "react-scripts eject",
     "lint": "eslint src/**/*.ts src/**/*.tsx",
     "fix": "prettier --write src/**/*.ts src/**/*.tsx && eslint --fix src/**/*.ts src/**/*.tsx",
-    "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "browserslist": {
     "production": [

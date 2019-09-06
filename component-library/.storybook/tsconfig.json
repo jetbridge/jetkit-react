@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig",
+  "compilerOptions": {
+    "jsx": "react",
+    "isolatedModules": false,
+    "noEmit": false
+  },
+  "include": ["../src/**/*"],
+  "exclude": ["node_modules", "../node_modules", "../../node_modules", "build"]
+}

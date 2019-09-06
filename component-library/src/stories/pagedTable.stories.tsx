@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { storiesOf } from '@storybook/react'
-import { PagedTable, usePagedTable, IPaginatedRequest, IPaginatedResponse } from '@jetbridge/frontend-core'
+import { PagedTable, usePagedTable, IPaginatedRequest, IPaginatedResponse } from '@jetkit/react'
 import { TableRow, TableCell } from '@material-ui/core'
-import { withPropsTable } from 'storybook-addon-react-docgen'
+// import { withPropsTable } from 'storybook-addon-react-docgen'
 
 const total = 100
 
@@ -47,7 +47,7 @@ function ModelTable() {
 }
 
 storiesOf('PagedTable', module)
-  .addDecorator(withPropsTable)
+  // .addDecorator(withPropsTable)
   .add('Table', () => {
     return (
       <div style={{ width: 500 }}>
