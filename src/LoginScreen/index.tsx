@@ -121,7 +121,7 @@ const LoginScreen: React.FunctionComponent<ILoginScreenProps> = ({
             <TextField
               type="email"
               inputProps={{
-                'data-testId': 'email',
+                'data-testid': 'email',
               }}
               autoComplete="email"
               className={`${classes.inputField} ${classes.emailInputField}`}
@@ -134,7 +134,7 @@ const LoginScreen: React.FunctionComponent<ILoginScreenProps> = ({
               <InputLabel htmlFor="adornment-password">Password</InputLabel>
               <Input
                 inputProps={{
-                  'data-testId': 'password',
+                  'data-testid': 'password',
                 }}
                 type={inputFields.showPassword ? 'text' : 'password'}
                 autoComplete="password"
