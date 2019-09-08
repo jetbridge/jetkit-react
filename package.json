@@ -1,6 +1,6 @@
 {
   "name": "@jetkit/react",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "module": "build/index.js",
   "main": "build/index.js",
   "types": "build/index.d.ts",
