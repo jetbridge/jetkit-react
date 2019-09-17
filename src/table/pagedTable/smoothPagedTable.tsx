@@ -78,7 +78,7 @@ export function useSmoothPagedTable<T>(props: IUsePagedTableProps<T>) {
   const [page, setPage] = React.useState(0)
   const [pageSize, setPageSize] = React.useState(defaultPageSize)
   const [error, setError] = React.useState<AxiosError>()
-  const [rows, setRows] = React.useState<{ [page: number]: T[] }>([])
+  const [rows, setRows] = React.useState<{ [page: number]: T[] }>({ 0: [] })
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
   // load data
@@ -121,7 +121,7 @@ export function useSmoothPagedTable<T>(props: IUsePagedTableProps<T>) {
       reloadData: loadAPI,
       page,
       renderProps: {
-        rows: Object.values(rows).flat(),
+        rows: Object.values(rows).reduce((acc, val) => acc.concat(val), []),
         page,
         setPage,
         pageSize,
