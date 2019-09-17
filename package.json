@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "axios-jwt": "^1.1.0",
+    "react-bottom-scroll-listener": "git+https://github.com/jetbridge/react-bottom-scroll-listener",
     "classnames": "^2.2.6",
     "jsonwebtoken": "^8.5.1",
     "react-dropzone": "^10.1.7",
@@ -83,8 +84,6 @@
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
     "axios": "^0.19.0",
-    "babel-eslint": "10.0.2",
-    "babel-loader": "8.0.5",
     "eslint": "^6.3.0",
     "eslint-config-react-app": "^5.0.1",
     "husky": "^2.4.1",
@@ -92,8 +91,7 @@
     "lint-staged": "^8.1.7",
     "prettier": "^1.17.1",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "webpack": "^4.35.0"
+    "react-dom": "^16.8.6"
   },
   "files": [
     "build"

@@ -2,37 +2,24 @@ import * as React from 'react'
 import Table from '@material-ui/core/Table'
 import TablePagination from '@material-ui/core/TablePagination'
 import TableFooter from '@material-ui/core/TableFooter'
-import { TableRow, TableBody } from '@material-ui/core'
-import EmptyTableRow from './emptyTableRow'
-import { IPaginatedRequest, IPaginatedResponse } from '../apiClient/paginated'
+import TableBody from '@material-ui/core/TableBody'
+import TableRow from '@material-ui/core/TableRow'
+import EmptyTableRow from '../emptyTableRow'
+import { AxiosError } from 'axios'
+import {
+  IPagedTableImpl,
+  IPagedDataContext,
+  IPagedTablePaging,
+  IPagedTableBaseProps,
+  IUsePagedTableProps,
+} from './models'
 
 // hook args
-export interface IUsePagedTableProps<T> {
-  queryParams?: object
-  apiCall: (req: IPaginatedRequest) => Promise<IPaginatedResponse<T[]>>
-  autoLoad?: boolean
-  defaultPageSize?: number
-}
 
-// data passed from hook to component
-export interface IPagedTableImpl<T> {
-  rows: T[]
-  pagedDataContext: IPagedDataContext
-  totalRows: number
-  pageSize: number
-  page: number
-  colSpan?: number
-  handleChangePage: (event: unknown, newPage: number) => void
-  handleChangeRowsPerPage: (event: React.ChangeEvent<HTMLInputElement>) => void
-}
+interface IDefaultPagedTableImpl<T> extends IPagedTableImpl<T>, IPagedTablePaging {}
 
 // the table element
-export interface IPagedTableProps<T> extends IPagedTableImpl<T> {
-  paperClassName?: string
-  tableClassName?: string
-  renderRow: (data: T) => React.ReactNode
-  header?: React.ReactElement
-  emptyRowText?: string
+export interface IPagedTableProps<T> extends IDefaultPagedTableImpl<T>, IPagedTableBaseProps<T> {
   footer?: React.ReactNode
 }
 
@@ -41,16 +28,14 @@ export interface IPagedTableProps<T> extends IPagedTableImpl<T> {
 export interface IPagedTableHook<T> {
   reloadData: () => void
   isLoading: boolean
-  renderProps: IPagedTableImpl<T>
+  renderProps: IDefaultPagedTableImpl<T>
   totalRows: number
   page: number // 0-indexed
 }
 
 // context for our data table
 // can be used by nested components to for a reload of the data, for instance when editing/deleting rows
-export interface IPagedDataContext {
-  reloadData: () => void
-}
+
 export const PagedDataContext = React.createContext<IPagedDataContext>({ reloadData: () => {} })
 
 export function PagedTable<T>({
@@ -114,6 +99,7 @@ export function PagedTable<T>({
     </PagedDataContext.Provider>
   )
 }
+
 // do a deep equality check before actually mutating rows
 // const setRowsIfChanged = <T>(resRows: T[], rows: T[], setRows: (r T[]) :void) => {
 //     if (!_.isEqual(resRows, rows)) setRows(resRows)
@@ -124,7 +110,7 @@ function usePagedTable<T>(props: IUsePagedTableProps<T>): IPagedTableHook<T> {
 
   const [page, setPage] = React.useState(0)
   const [pageSize, setPageSize] = React.useState(defaultPageSize)
-  const [error, setError] = React.useState<any>(null)
+  const [error, setError] = React.useState<AxiosError>()
   const [rows, setRows] = React.useState<T[]>([])
   const [totalRows, setTotalRows] = React.useState(0)
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
