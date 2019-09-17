@@ -9,8 +9,10 @@ import { IUser, IUserCredential } from './store/auth'
 import snackbarCustom from './snackbarCustom'
 import notify from './snackbarCustom/notify'
 import useSnackbar, { UseSnackbarUI } from './snackbarCustom/useSnackbar'
-import usePagedTable from './table/pagedTable'
-import { PagedTable, IPagedTableHook, IPagedTableImpl, IPagedTableProps, PagedDataContext } from './table/pagedTable'
+import usePagedTable from './table/pagedTable/pagedTable'
+import { PagedTable, IPagedTableHook, IPagedTableProps, PagedDataContext } from './table/pagedTable/pagedTable'
+import { IPagedTableImpl } from './table/pagedTable/models'
+import { useSmoothPagedTable, SmoothPagedTable } from './table/pagedTable/smoothPagedTable'
 import { requestPaginated, FilterableAPICall } from './apiClient/paginated'
 import PrivateRoute from './privateRoute'
 import { isLoggedIn, clearAuthTokens, getAccessToken } from 'axios-jwt'
@@ -62,4 +64,6 @@ export {
   FileDropzone,
   IFileDropzoneProps,
   useDropzone,
+  SmoothPagedTable,
+  useSmoothPagedTable,
 }

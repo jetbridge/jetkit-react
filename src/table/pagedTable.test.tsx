@@ -1,5 +1,5 @@
 import * as React from 'react'
-import usePagedTable, { PagedTable } from './pagedTable'
+import usePagedTable, { PagedTable } from './pagedTable/pagedTable'
 import { PaginatedRequestFunc, IPaginatedResponse } from '../apiClient/paginated'
 import { TableHead, TableRow, TableCell } from '@material-ui/core'
 

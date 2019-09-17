@@ -23,7 +23,7 @@ const styles = (theme: Theme) =>
 
 interface IMenuProps extends WithStyles<typeof styles> {
   sections: IMenuSection[]
-  defaultSelectedSubSection?: any
+  defaultSelectedSubSection?: object
   defaultSelectedSection?: IMenuSection
   sectionSelected?: (section: IMenuSection, subSectionTitle: string) => void
   logoSrc: string
@@ -48,7 +48,8 @@ const Menu: React.FC<IMenuProps> = ({
 
   const onClick = (section: IMenuSection, subSectionTitle?: string) => {
     setState(prevState => {
-      let selectedSubSection = subSectionTitle || prevState.selectedSubSection[section.title]
+      let selectedSubSection =
+        subSectionTitle || (prevState.selectedSubSection && prevState.selectedSubSection[section.title])
       if (!selectedSubSection) {
         // default to first subsecion if exists
         selectedSubSection = section.subsections && section.subsections[0] ? section.subsections[0].title : undefined
@@ -62,7 +63,10 @@ const Menu: React.FC<IMenuProps> = ({
 
   React.useEffect(() => {
     if (onSectionSelected && state.selectedSection) {
-      onSectionSelected(state.selectedSection, state.selectedSubSection[state.selectedSection.title])
+      onSectionSelected(
+        state.selectedSection,
+        state.selectedSubSection && state.selectedSubSection[state.selectedSection.title]
+      )
     }
   }, [onSectionSelected, state.selectedSection, state.selectedSubSection])
 
@@ -77,7 +81,7 @@ const Menu: React.FC<IMenuProps> = ({
             section={s}
             onClick={onClick}
             expanded={state.selectedSection === s}
-            selectedSubSection={state.selectedSubSection[s.title]}
+            selectedSubSection={state.selectedSubSection && state.selectedSubSection[s.title]}
           />
         ))}
       </div>

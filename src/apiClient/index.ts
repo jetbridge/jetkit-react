@@ -10,7 +10,7 @@ apiClient.defaults.headers.common['Content-Type'] = 'application/json'
 apiClient.defaults.baseURL = BASE_URL
 
 // query params serializer for converting params name from ids[] to ids without square brackets
-const parseParams = (params: any) => {
+const parseParams = (params: object) => {
   const keys = Object.keys(params)
   let options = ''
 
