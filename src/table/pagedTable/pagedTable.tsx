@@ -150,42 +150,44 @@ function usePagedTable<T>(props: IUsePagedTableProps<T>): IPagedTableHook<T> {
   // our PagedDataContext
   const pagedDataContext = React.useMemo(() => ({ reloadData: loadAPI }), [loadAPI])
 
-  // does useMemo help here at all?
-  return React.useMemo(
+  const renderProps = React.useMemo<IDefaultPagedTableImpl<T>>(
     () => ({
-      isLoading,
-      reloadData: loadAPI,
-      totalRows,
-      page,
-      renderProps: {
-        rows,
-        page,
-        setPage,
-        pageSize,
-        setPageSize,
-        totalRows,
-        isLoading,
-        handleChangePage,
-        pagedDataContext,
-        handleChangeRowsPerPage,
-        setTotalRows,
-      },
-    }),
-    [
-      isLoading,
-      loadAPI,
       rows,
       page,
       setPage,
       pageSize,
       setPageSize,
       totalRows,
+      isLoading,
       handleChangePage,
       pagedDataContext,
       handleChangeRowsPerPage,
       setTotalRows,
-    ]
+    }),
+    []
   )
+
+  // construct initial independent retVal that remains stable even if fields inside change
+  const retVal = React.useMemo<IPagedTableHook<T>>(
+    () => ({
+      isLoading: false,
+      reloadData: () => {},
+      renderProps,
+      totalRows: 0,
+      page: 0,
+    }),
+    []
+  )
+
+  // fill in fields of retVal
+  retVal.isLoading = isLoading
+  retVal.reloadData = loadAPI
+  retVal.totalRows = totalRows
+  retVal.page = page
+
+  retVal.renderProps = renderProps
+
+  return retVal
 }
 
 export default usePagedTable
