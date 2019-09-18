@@ -1,6 +1,6 @@
 {
   "name": "@jetkit/react",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "module": "build/index.js",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -86,6 +86,7 @@
     "axios": "^0.19.0",
     "eslint": "^6.3.0",
     "eslint-config-react-app": "^5.0.1",
+    "eslint-plugin-react-hooks": "^2.0.1",
     "husky": "^2.4.1",
     "jetbridge-react-scripts": "latest",
     "lint-staged": "^8.1.7",
