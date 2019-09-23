@@ -4,6 +4,8 @@ import notify from '../snackbarCustom/notify'
 export const handleError = (error: AxiosError, resourceName?: string) => {
   let message = 'Something went wrong. Please try again later.'
 
+  console.error(error)
+
   const response = error.response
   if (response) {
     if (response.status === 401) {
