@@ -1,7 +1,13 @@
 import { handleError } from './errorHandler/index'
 import { IPaginatedRequest, IPaginatedResponse } from './apiClient/paginated'
 import { IMenuSection } from './types'
-import { apiClient, requestRefresh, refreshTokenIfNeeded } from './apiClient/index'
+import {
+  apiClient,
+  requestRefresh,
+  refreshTokenIfNeeded,
+  IAuthResponse,
+  setAuthTokensFromAuthResponse,
+} from './apiClient/index'
 import LoginScreen from './LoginScreen'
 import Menu from './menu'
 import authService from './service/auth'
@@ -35,6 +41,7 @@ export {
   useSnackbar,
   notify,
   UseSnackbarUI,
+  TextFieldWithDebounce,
   usePagedTable,
   PagedTable,
   IPaginatedRequest,
@@ -45,6 +52,9 @@ export {
   IPagedTableImpl,
   IPagedTableProps,
   PagedDataContext,
+  toTitleCase,
+  // authentication
+  IAuthResponse,
   requestRefresh,
   PrivateRoute,
   refreshTokenIfNeeded,
@@ -52,8 +62,7 @@ export {
   getAccessToken,
   isLoggedIn,
   clearAuthTokens,
-  TextFieldWithDebounce,
-  toTitleCase,
+  setAuthTokensFromAuthResponse,
   // asset
   UploadFileToS3Args,
   UploadRequest,
