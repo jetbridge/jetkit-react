@@ -94,6 +94,7 @@ export function useSmoothPagedTable<T>(props: IUsePagedTableProps<T>) {
     try {
       if (page + 1 > lastPage) return
       setIsLoading(true)
+      // TablePagination is zero-indexed, API is not
       const res = await apiCall({ page: page + 1, pageSize, queryParams: queryParams })
 
       setRows(prev => ({
@@ -102,8 +103,10 @@ export function useSmoothPagedTable<T>(props: IUsePagedTableProps<T>) {
       }))
       setLastPage(res.last_page)
 
-      // TablePagination is zero-indexed, API is not
-      if (res.page) setPage(prevPage => Math.max(prevPage, res.page - 1))
+      // set newPage as current page
+      // someone maybe scrolling like crazy so let's always remember last page
+
+      if (res.page) setPage(prevPage => Math.max(prevPage, res.page))
       else setPage(0)
     } catch (err) {
       setError(err)
@@ -115,12 +118,12 @@ export function useSmoothPagedTable<T>(props: IUsePagedTableProps<T>) {
   // load on component mount
   React.useEffect(() => {
     if (autoLoad && !error) loadAPI()
-  }, [loadAPI, autoLoad, error])
+  }, [autoLoad])
 
   // pagination controls callback
   const handleDidScrollToEnd = React.useCallback(() => {
-    setPage(prevPage => prevPage + 1)
-  }, [setPage])
+    loadAPI()
+  }, [loadAPI])
 
   // our PagedDataContext
   const pagedDataContext = React.useMemo(() => ({ reloadData: loadAPI }), [loadAPI])
