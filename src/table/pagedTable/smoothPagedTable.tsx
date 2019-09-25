@@ -64,7 +64,7 @@ export function SmoothPagedTable<T>({
         <Table className={tableClassName}>
           {header ? header : null}
 
-          <TableBody key={'table_body'} data-testid="paged-body">
+          <TableBody data-testid="paged-body">
             {rowsToDisplay && rowsToDisplay.length ? (
               rowsToDisplay
             ) : (
