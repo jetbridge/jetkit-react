@@ -1,6 +1,5 @@
 import * as React from 'react'
 import classNames from 'classnames'
-import BottomScrollListener from 'react-bottom-scroll-listener'
 import { AxiosError } from 'axios'
 import { makeStyles } from '@material-ui/styles'
 import { IPagedTableImpl, IPagedTableBaseProps, IUsePagedTableProps } from './models'
@@ -48,26 +47,33 @@ export function SmoothPagedTable<T>({
   } else if (!columnsSpan) {
     columnsSpan = 1
   }
+
+  const handleScroll = React.useCallback(
+    (event: React.UIEvent<HTMLDivElement>) => {
+      const element: any = event.target
+      if (element.scrollHeight - element.scrollTop === element.clientHeight) {
+        handleDidScrollToEnd()
+      }
+    },
+    [handleDidScrollToEnd]
+  )
+
   return (
     <PagedDataContext.Provider value={pagedDataContext}>
-      <BottomScrollListener onBottom={handleDidScrollToEnd}>
-        {scrollRef => (
-          <div className={classNames(rootClassName, classes.smoothTableRoot)}>
-            <Table className={tableClassName}>
-              {header ? header : null}
+      <div onScroll={handleScroll} className={classNames(rootClassName, classes.smoothTableRoot)}>
+        <Table className={tableClassName}>
+          {header ? header : null}
 
-              <TableBody key={'table_body'} ref={scrollRef} data-testid="paged-body">
-                {rowsToDisplay && rowsToDisplay.length ? (
-                  rowsToDisplay
-                ) : (
-                  <EmptyTableRow colSpan={columnsSpan} rowText={emptyRowText} />
-                )}
-                {isLoading && <EmptyTableRow colSpan={columnsSpan} rowText={'Loading'} />}
-              </TableBody>
-            </Table>
-          </div>
-        )}
-      </BottomScrollListener>
+          <TableBody data-testid="paged-body">
+            {rowsToDisplay && rowsToDisplay.length ? (
+              rowsToDisplay
+            ) : (
+              <EmptyTableRow colSpan={columnsSpan} rowText={emptyRowText} />
+            )}
+            {isLoading && <EmptyTableRow colSpan={columnsSpan} rowText={'Loading'} />}
+          </TableBody>
+        </Table>
+      </div>
     </PagedDataContext.Provider>
   )
 }
@@ -76,6 +82,7 @@ export function useSmoothPagedTable<T>(props: IUsePagedTableProps<T>) {
   const { apiCall, queryParams, autoLoad = true, defaultPageSize = 25 } = props
 
   const [page, setPage] = React.useState(0)
+  const [lastPage, setLastPage] = React.useState<number>()
   const [pageSize, setPageSize] = React.useState(defaultPageSize)
   const [error, setError] = React.useState<AxiosError>()
   const [rows, setRows] = React.useState<{ [page: number]: T[] }>({ 0: [] })
@@ -85,31 +92,38 @@ export function useSmoothPagedTable<T>(props: IUsePagedTableProps<T>) {
   const loadAPI = React.useCallback(async () => {
     // fetch data from paginated API
     try {
+      if (lastPage && page + 1 > lastPage) return
       setIsLoading(true)
+      // TablePagination is zero-indexed, API is not
       const res = await apiCall({ page: page + 1, pageSize, queryParams: queryParams })
 
       setRows(prev => ({
         ...prev,
         [page]: res.rows,
       }))
+      setLastPage(res.last_page)
 
-      // TablePagination is zero-indexed, API is not
-      if (res.page) setPage(res.page - 1)
+      // set newPage as current page
+      // someone maybe scrolling like crazy so let's always remember last page
+
+      if (res.page) setPage(prevPage => Math.max(prevPage, res.page))
       else setPage(0)
     } catch (err) {
       setError(err)
     } finally {
       setIsLoading(false)
     }
-  }, [apiCall, page, pageSize, queryParams, setIsLoading, setError])
+  }, [setLastPage, lastPage, apiCall, page, pageSize, queryParams, setIsLoading, setError])
 
   // load on component mount
   React.useEffect(() => {
     if (autoLoad && !error) loadAPI()
-  }, [loadAPI, autoLoad, error])
+  }, [autoLoad])
 
   // pagination controls callback
-  const handleDidScrollToEnd = React.useCallback(() => setPage(prevPage => prevPage + 1), [setPage])
+  const handleDidScrollToEnd = React.useCallback(() => {
+    loadAPI()
+  }, [loadAPI])
 
   // our PagedDataContext
   const pagedDataContext = React.useMemo(() => ({ reloadData: loadAPI }), [loadAPI])
