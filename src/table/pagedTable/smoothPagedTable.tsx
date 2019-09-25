@@ -82,7 +82,7 @@ export function useSmoothPagedTable<T>(props: IUsePagedTableProps<T>) {
   const { apiCall, queryParams, autoLoad = true, defaultPageSize = 25 } = props
 
   const [page, setPage] = React.useState(0)
-  const [lastPage, setLastPage] = React.useState(5000)
+  const [lastPage, setLastPage] = React.useState<number>()
   const [pageSize, setPageSize] = React.useState(defaultPageSize)
   const [error, setError] = React.useState<AxiosError>()
   const [rows, setRows] = React.useState<{ [page: number]: T[] }>({ 0: [] })
@@ -92,7 +92,7 @@ export function useSmoothPagedTable<T>(props: IUsePagedTableProps<T>) {
   const loadAPI = React.useCallback(async () => {
     // fetch data from paginated API
     try {
-      if (page + 1 > lastPage) return
+      if (lastPage && page + 1 > lastPage) return
       setIsLoading(true)
       // TablePagination is zero-indexed, API is not
       const res = await apiCall({ page: page + 1, pageSize, queryParams: queryParams })
