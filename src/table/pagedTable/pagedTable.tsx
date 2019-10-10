@@ -141,10 +141,10 @@ function usePagedTable<T>(props: IUsePagedTableProps<T>): IPagedTableHook<T> {
   }, [loadAPI, autoLoad, error])
 
   // pagination controls callback
-  const handleChangePage = React.useCallback((event: unknown, newPage: number) => setPage(newPage), [])
+  const handleChangePage = React.useCallback((event: unknown, newPage: number) => setPage(newPage), [setPage])
   const handleChangeRowsPerPage = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => setPageSize(+event.target.value),
-    []
+    [setPageSize]
   )
 
   // our PagedDataContext
