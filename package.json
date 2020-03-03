@@ -3,11 +3,12 @@
   "private": true,
   "scripts": {
     "test": "lerna run test",
-    "test-ci": "lerna run test-ci"
+    "test-ci": "lerna run test-ci",
+    "lint-staged": "lerna exec -- lint-staged"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lerna exec lint-staged"
+      "pre-commit": "npm run lint-staged"
     }
   },
   "devDependencies": {
