@@ -8,7 +8,7 @@ import {
 } from './apiClient/index'
 import authService from './service/auth'
 import { IUser, IUserCredential } from './store/auth'
-import { requestPaginated, FilterableAPICall } from './apiClient/paginated'
+import { requestPaginated, FilterableAPICall, PaginatedRequestFunc } from './apiClient/paginated'
 import { isLoggedIn, clearAuthTokens, getAccessToken } from 'axios-jwt'
 import { UploadFileToS3Args, UploadRequest, UploadRequestClass, PrepareUploadResponse } from './apiClient/asset'
 
@@ -20,6 +20,7 @@ export {
   IPaginatedRequest,
   IPaginatedResponse,
   FilterableAPICall,
+  PaginatedRequestFunc,
   requestPaginated,
   // authentication
   IAuthResponse,

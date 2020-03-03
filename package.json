@@ -2,7 +2,7 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "ci": "npm ci && lerna exec npm ci",
+    "ci": "lerna bootstrap --ci",
     "test": "lerna run test",
     "test-ci": "lerna run test-ci",
     "lint-staged": "lerna exec -- lint-staged"

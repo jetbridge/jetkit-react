@@ -10,6 +10,7 @@
     "url": "git+https://github.com/jetbridge/jetkit-react.git"
   },
   "dependencies": {
+    "@jetkit/api": "1.0.0",
     "axios-jwt": "^1.2.0",
     "classnames": "^2.2.6",
     "jsonwebtoken": "^8.5.1",
