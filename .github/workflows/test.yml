@@ -7,6 +7,6 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Install
-        run: npm ci
+        run: npm run ci
       - name: Test
         run: npm run test-ci
