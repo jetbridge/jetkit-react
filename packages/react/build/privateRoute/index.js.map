@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../src/privateRoute/index.tsx"],"names":[],"mappings":";;AAAA,+BAA8B;AAC9B,+CAA0D;AAC1D,yCAAsC;AAMtC,SAAS,YAAY,CAAC,KAAyB;IAC7C,IAAI,sBAAU,EAAE,EAAE;QAChB,OAAO,oBAAC,oBAAK,oBAAK,KAAK,EAAI,CAAA;KAC5B;IACD,OAAO,oBAAC,uBAAQ,IAAC,EAAE,EAAE,KAAK,CAAC,aAAa,GAAI,CAAA;AAC9C,CAAC;AAED,kBAAe,YAAY,CAAA"}
