@@ -9,4 +9,4 @@ jobs:
       - name: Install
         run: npm ci
       - name: Build
-        run: npm test-ci
+        run: npm run test-ci
