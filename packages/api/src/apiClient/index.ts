@@ -59,11 +59,13 @@ export const setAuthTokensFromAuthResponse = async (res: IAuthResponse) => {
 
 export const requestRefresh: TokenRefreshRequest = async (refreshToken: string): Promise<string> => {
   // perform refresh
-  const res: IAuthResponse = (await axios.post(refreshEndpoint, null, {
-    headers: {
-      Authorization: `Bearer ${refreshToken}`,
-    },
-  })).data
+  const res: IAuthResponse = (
+    await axios.post(refreshEndpoint, null, {
+      headers: {
+        Authorization: `Bearer ${refreshToken}`,
+      },
+    })
+  ).data
   return res.access_token
 }
 

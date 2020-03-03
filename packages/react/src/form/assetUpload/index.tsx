@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useDropzone, IFileDropzone } from '../fileDropzone/useFileDropzone'
 import FileDropzone from '../fileDropzone'
 import { Button, LinearProgress, Typography } from '@material-ui/core'
-import { UploadFileToS3Args, UploadRequestClass } from '../../apiClient/asset'
+import { UploadFileToS3Args, UploadRequestClass } from '@jetkit/api'
 import { makeStyles } from '@material-ui/styles'
 
 const useStyles = makeStyles({

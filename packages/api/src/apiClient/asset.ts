@@ -12,7 +12,7 @@ export interface UploadFileToS3Args<MT = {}> {
 }
 
 // type representing a class of type UploadRequest
-export type UploadRequestClass<MT = {}> = new (file: File, model?: MT) => UploadRequest<MT>
+export type UploadRequestClass<MT = {}> = new (file: File, model?: MT)=> UploadRequest<MT>
 
 /**
  * Class responsible for asking backend for a presigned S3 PutObject API call and then sending a file to S3 with it.

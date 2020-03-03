@@ -1,4 +1,4 @@
-import { IPaginatedRequest, IPaginatedResponse } from '../../apiClient/paginated'
+import { IPaginatedRequest, IPaginatedResponse } from '@jetkit/api'
 
 export interface IPagedDataContext {
   reloadData: () => void
