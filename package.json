@@ -7,7 +7,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "echo 'Lint goes here'"
+      "pre-commit": "lerna exec lint-staged"
     }
   },
   "devDependencies": {
