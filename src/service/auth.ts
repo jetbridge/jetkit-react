@@ -8,8 +8,6 @@ export default {
     setAuthTokens(authResponseToAuthTokens(res))
     return res
   },
-  signUp: async (email: string, password: string): Promise<IUserCredential> => {
-    const res = (await apiClient.post('/auth/sign-up', { email, password })).data
-    return res
-  },
+  signUp: async (email: string, password: string): Promise<IUserCredential> =>
+    (await apiClient.post('/auth/sign-up', { email, password })).data,
 }
