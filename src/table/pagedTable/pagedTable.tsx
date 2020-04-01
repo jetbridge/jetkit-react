@@ -71,7 +71,7 @@ export function PagedTable<T>({
     columnsSpan = 1
   }
 
-  const listIsNotEmpty = React.useMemo(() => rowsToDisplay && rowsToDisplay.length, [rowsToDisplay])
+  const listIsNotEmpty = React.useMemo(() => rowsToDisplay?.length, [rowsToDisplay])
 
   //render manually passed component if the list is empty
   const renderEmptyComponent = React.useCallback(
