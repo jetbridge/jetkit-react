@@ -37,9 +37,7 @@ export interface IPagedTableHook<T> {
 // can be used by nested components to for a reload of the data, for instance when editing/deleting rows
 
 export const PagedDataContext = React.createContext<IPagedDataContext>({
-  reloadData: () => {
-    return undefined
-  },
+  reloadData: () => undefined,
 })
 
 export function PagedTable<T>({
@@ -71,7 +69,7 @@ export function PagedTable<T>({
     columnsSpan = 1
   }
 
-  const listIsNotEmpty = React.useMemo(() => rowsToDisplay?.length, [rowsToDisplay])
+  const listIsNotEmpty = React.useMemo(() => rowsToDisplay && rowsToDisplay.length, [rowsToDisplay])
 
   //render manually passed component if the list is empty
   const renderEmptyComponent = React.useCallback(
@@ -191,9 +189,7 @@ function usePagedTable<T>(props: IUsePagedTableProps<T>): IPagedTableHook<T> {
   const retVal = React.useMemo<IPagedTableHook<T>>(
     () => ({
       isLoading: false,
-      reloadData: () => {
-        return undefined
-      },
+      reloadData: () => undefined,
       renderProps,
       totalRows: 0,
       page: 0,
