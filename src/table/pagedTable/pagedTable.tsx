@@ -36,13 +36,18 @@ export interface IPagedTableHook<T> {
 // context for our data table
 // can be used by nested components to for a reload of the data, for instance when editing/deleting rows
 
-export const PagedDataContext = React.createContext<IPagedDataContext>({ reloadData: () => {} })
+export const PagedDataContext = React.createContext<IPagedDataContext>({
+  reloadData: () => {
+    return undefined
+  },
+})
 
 export function PagedTable<T>({
   header,
   tableClassName,
   renderRow,
   emptyRowText,
+  emptyRowComponent,
   rows,
   pagedDataContext,
   totalRows,
@@ -66,17 +71,19 @@ export function PagedTable<T>({
     columnsSpan = 1
   }
 
+  const listIsNotEmpty = React.useMemo(() => rowsToDisplay && rowsToDisplay.length, [rowsToDisplay])
+
+  //render manually passed component if the list is empty
+  const renderEmptyComponent = React.useCallback(
+    () => (emptyRowComponent ? emptyRowComponent : <EmptyTableRow colSpan={columnsSpan} rowText={emptyRowText} />),
+    [columnsSpan, emptyRowText, emptyRowComponent]
+  )
+
   return (
     <PagedDataContext.Provider value={pagedDataContext}>
       <Table className={tableClassName}>
         {header ? header : null}
-        <TableBody data-testid="paged-body">
-          {rowsToDisplay && rowsToDisplay.length ? (
-            rowsToDisplay
-          ) : (
-            <EmptyTableRow colSpan={columnsSpan} rowText={emptyRowText} />
-          )}
-        </TableBody>
+        <TableBody data-testid="paged-body">{listIsNotEmpty ? rowsToDisplay : renderEmptyComponent()}</TableBody>
 
         <TableFooter>
           <TableRow>
@@ -184,7 +191,9 @@ function usePagedTable<T>(props: IUsePagedTableProps<T>): IPagedTableHook<T> {
   const retVal = React.useMemo<IPagedTableHook<T>>(
     () => ({
       isLoading: false,
-      reloadData: () => {},
+      reloadData: () => {
+        return undefined
+      },
       renderProps,
       totalRows: 0,
       page: 0,
