@@ -11,6 +11,7 @@ export interface IPagedTableBaseProps<T> {
   renderRow: (data: T) => React.ReactNode
   header?: React.ReactElement
   emptyRowText?: string
+  emptyRowComponent?: React.ReactElement
 }
 export interface IUsePagedTableProps<T> {
   queryParams?: object
