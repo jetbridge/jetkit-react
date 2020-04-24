@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import { Eventual } from '../types'
+import { useAsyncEffect } from '../useAsyncEffect'
 
 /**
  * Wraps a promise and returns a type-safe `Eventual` value that properly updates if dependencies change.
@@ -22,17 +23,17 @@ export const useEventual = <T>(dataSource: () => Promise<T>, deps: React.Depende
 
   const incrementVersion = React.useCallback(() => (stateVersion.current = stateVersion.current + 1), [])
 
-  React.useEffect(() => {
+  useAsyncEffect(async () => {
     setState({ loading: true })
     incrementVersion()
 
     const expectedVersion = stateVersion.current
 
-    dataSource().then(result => {
-      if (stateVersion.current === expectedVersion) {
-        setState({ loading: false, value: result })
-      }
-    })
+    const result = await dataSource()
+
+    if (stateVersion.current === expectedVersion) {
+      setState({ loading: false, value: result })
+    }
   }, deps)
 
   return state
