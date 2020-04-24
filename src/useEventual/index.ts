@@ -28,7 +28,7 @@ export const useEventual = <T>(dataSource: () => Promise<T>, deps: React.Depende
   // order in which they resolve.
   const stateVersion = React.useRef(0)
 
-  const incrementVersion = React.useCallback(() => (stateVersion.current = stateVersion.current + 1), [])
+  const incrementVersion = React.useCallback(() => ++stateVersion.current, [])
 
   useAsyncEffect(async () => {
     setState({ loading: true })
