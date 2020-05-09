@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "axios-jwt": "^1.2.0",
+    "camelcase-keys": "^6.2.2",
     "classnames": "^2.2.6",
     "jsonwebtoken": "^8.5.1",
     "react-dropzone": "^10.1.7",

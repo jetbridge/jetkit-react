@@ -1,8 +1,10 @@
 import apiClient from '.'
+import * as camelcaseKeys from 'camelcase-keys'
 
 export interface IAPIDescriptor {
   method?: 'get' | 'post' | 'put' | 'patch' | 'delete' | 'trace' | 'options' | 'head'
   url: string
+  camelCase?: boolean
 }
 
 export interface Pagination {
@@ -31,9 +33,9 @@ const sortParams = (params: object) =>
 /**
  * Returns a function that performs a paginated API request.
  */
-export const requestPaginated = <ResponseT>({ url, method = 'get' }: IAPIDescriptor) => (queryParams = {}) => async (
-  paginatedRequest: IPaginatedRequest
-): Promise<IPaginatedResponse<ResponseT>> => {
+export const requestPaginated = <ResponseT>({ url, method = 'get', camelCase = false }: IAPIDescriptor) => (
+  queryParams = {}
+) => async (paginatedRequest: IPaginatedRequest): Promise<IPaginatedResponse<ResponseT>> => {
   // GET only
   if (method !== 'get') throw new Error('Only GET method is supported for paginated APIs right now.')
 
@@ -49,7 +51,7 @@ export const requestPaginated = <ResponseT>({ url, method = 'get' }: IAPIDescrip
   const pagination: Pagination = JSON.parse(response.headers['x-pagination'])
   return {
     ...pagination,
-    rows: response.data,
+    rows: camelCase ? camelcaseKeys(response.data, { deep: true }) : response.data,
   }
 }
 // for typing requestPaginated
