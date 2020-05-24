@@ -28,6 +28,7 @@ import AssetUpload, { IAssetUpload } from './form/assetUpload'
 import FileDropzone, { IFileDropzoneProps } from './form/fileDropzone'
 import { useDropzone } from './form/fileDropzone/useFileDropzone'
 import toTitleCase from './toTitleCase'
+import { useEventual } from './useEventual/index'
 
 export {
   LoginScreen,
@@ -75,4 +76,5 @@ export {
   useDropzone,
   SmoothPagedTable,
   useSmoothPagedTable,
+  useEventual,
 }

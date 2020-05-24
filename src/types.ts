@@ -7,3 +7,5 @@ export interface IMenuSection {
   expanded?: boolean
   icon?: any //TODO: FIX ANY!
 }
+
+export type Eventual<T> = { loading: true } | { loading: false; value: T }
