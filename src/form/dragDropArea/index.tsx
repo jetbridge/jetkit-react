@@ -1,21 +1,13 @@
 import * as React from 'react'
-import { makeStyles } from '@material-ui/core'
-
-const useStyles = makeStyles({
-  root: {
-    height: '100vh',
-    width: '100%',
-  },
-})
 
 interface IDragDropAreaProps {
   overlay: React.ReactElement
   children: React.ReactElement
   onFilesDrop: (files: File[]) => void
+  className?: string
 }
 
-const DragDropArea = ({ overlay, children, onFilesDrop }: IDragDropAreaProps) => {
-  const classes = useStyles()
+const DragDropArea = ({ overlay, children, onFilesDrop, className }: IDragDropAreaProps) => {
   const [dragActive, setDragActive] = React.useState(0)
 
   const onDragEnter = React.useCallback((event: React.DragEvent<HTMLDivElement>) => {
@@ -47,7 +39,7 @@ const DragDropArea = ({ overlay, children, onFilesDrop }: IDragDropAreaProps) =>
 
   return (
     <div
-      className={classes.root}
+      className={className}
       onDragEnter={onDragEnter}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}
