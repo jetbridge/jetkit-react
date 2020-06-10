@@ -29,6 +29,7 @@ import FileDropzone, { IFileDropzoneProps } from './form/fileDropzone'
 import { useDropzone } from './form/fileDropzone/useFileDropzone'
 import toTitleCase from './toTitleCase'
 import { useEventual } from './useEventual/index'
+import DragDropArea from './form/dragDropArea'
 
 export {
   LoginScreen,
@@ -77,4 +78,5 @@ export {
   SmoothPagedTable,
   useSmoothPagedTable,
   useEventual,
+  DragDropArea,
 }
