@@ -13,6 +13,7 @@ import {
   IPagedTableBaseProps,
   IUsePagedTableProps,
 } from './models'
+import { useDebouncedCallback } from 'use-debounce'
 
 // hook args
 
@@ -146,7 +147,8 @@ function usePagedTable<T>(props: IUsePagedTableProps<T>): IPagedTableHook<T> {
   }, [loadAPI, autoLoad, error])
 
   // pagination controls callback
-  const handleChangePage = React.useCallback((event: unknown, newPage: number) => setPage(newPage), [setPage])
+  const [debouncedPageNavigation] = useDebouncedCallback((event: unknown, newPage: number) => setPage(newPage), 200)
+  const handleChangePage = React.useCallback(debouncedPageNavigation, [setPage])
   const handleChangeRowsPerPage = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => setPageSize(+event.target.value),
     [setPageSize]
