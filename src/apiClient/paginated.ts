@@ -1,8 +1,10 @@
 import apiClient from '.'
+import * as camelcaseKeys from 'camelcase-keys'
 
 export interface IAPIDescriptor {
   method?: 'get' | 'post' | 'put' | 'patch' | 'delete' | 'trace' | 'options' | 'head'
   url: string
+  camelCase?: boolean
 }
 
 export interface Pagination {
@@ -23,18 +25,23 @@ export interface IPaginatedRequest {
   queryParams?: object
 }
 
+const sortParams = (params: object) =>
+  Object.keys(params)
+    .sort()
+    .reduce((a, c) => ((a[c] = params[c]), a), {})
+
 /**
  * Returns a function that performs a paginated API request.
  */
-export const requestPaginated = <ResponseT>({ url, method = 'get' }: IAPIDescriptor) => (queryParams = {}) => async (
-  paginatedRequest: IPaginatedRequest
-): Promise<IPaginatedResponse<ResponseT>> => {
+export const requestPaginated = <ResponseT>({ url, method = 'get', camelCase = false }: IAPIDescriptor) => (
+  queryParams = {}
+) => async (paginatedRequest: IPaginatedRequest): Promise<IPaginatedResponse<ResponseT>> => {
   // GET only
   if (method !== 'get') throw new Error('Only GET method is supported for paginated APIs right now.')
 
   // construct pagination params
   const paginationParams = { page: paginatedRequest.page, page_size: paginatedRequest.pageSize }
-  const response = await apiClient.get<ResponseT>(url, { params: { ...paginationParams, ...queryParams } })
+  const response = await apiClient.get<ResponseT>(url, { params: sortParams({ ...paginationParams, ...queryParams }) })
 
   // pagination info lives in response header
 
@@ -44,7 +51,7 @@ export const requestPaginated = <ResponseT>({ url, method = 'get' }: IAPIDescrip
   const pagination: Pagination = JSON.parse(response.headers['x-pagination'])
   return {
     ...pagination,
-    rows: response.data,
+    rows: camelCase ? camelcaseKeys(response.data, { deep: true }) : response.data,
   }
 }
 // for typing requestPaginated

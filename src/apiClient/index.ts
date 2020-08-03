@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useAuthTokenInterceptor } from 'axios-jwt'
+import { useAuthTokenInterceptor, setAuthTokens } from 'axios-jwt'
 import { IAuthTokens, TokenRefreshRequest, refreshTokenIfNeeded as ajwtRefreshTokenIfNeeded } from 'axios-jwt'
 
 // https://facebook.github.io/create-react-app/docs/adding-custom-environment-variables
@@ -10,7 +10,7 @@ apiClient.defaults.headers.common['Content-Type'] = 'application/json'
 apiClient.defaults.baseURL = BASE_URL
 
 // query params serializer for converting params name from ids[] to ids without square brackets
-const parseParams = (params: any) => {
+const parseParams = (params: object) => {
   const keys = Object.keys(params)
   let options = ''
 
@@ -46,6 +46,16 @@ export const authResponseToAuthTokens = (res: IAuthResponse): IAuthTokens => ({
   accessToken: res.access_token,
   refreshToken: res.refresh_token,
 })
+
+/**
+ * Process an AuthResponse from auth API and save JWT.
+ */
+export const setAuthTokensFromAuthResponse = async (res: IAuthResponse) => {
+  // transform auth API response
+  const tokenRes = authResponseToAuthTokens(res)
+  setAuthTokens(tokenRes)
+  return tokenRes
+}
 
 export const requestRefresh: TokenRefreshRequest = async (refreshToken: string): Promise<string> => {
   // perform refresh

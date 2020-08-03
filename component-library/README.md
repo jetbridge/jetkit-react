@@ -1,11 +1,11 @@
 ### Run in parent directory:
 
 ```
-yarn start
+npm start
 ```
 
 ### Run in this directory:
 
 ```
-yarn storybook
+npm run storybook
 ```

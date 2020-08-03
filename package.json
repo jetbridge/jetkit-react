@@ -1,6 +1,6 @@
 {
   "name": "@jetkit/react",
-  "version": "0.2.12",
+  "version": "2.3.0",
   "module": "build/index.js",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -10,7 +10,8 @@
     "url": "git+https://github.com/jetbridge/jetkit-react.git"
   },
   "dependencies": {
-    "axios-jwt": "^1.1.0",
+    "axios-jwt": "^1.2.0",
+    "camelcase-keys": "^6.2.2",
     "classnames": "^2.2.6",
     "jsonwebtoken": "^8.5.1",
     "react-dropzone": "^10.1.7",
@@ -71,6 +72,7 @@
     "@material-ui/icons": "^3.0.2",
     "@testing-library/jest-dom": "^4.0.0",
     "@testing-library/react": "^8.0.4",
+    "@testing-library/react-hooks": "^3.2.1",
     "@types/classnames": "^2.2.9",
     "@types/jest": "^24.0.13",
     "@types/jsonwebtoken": "^8.3.2",
@@ -83,17 +85,16 @@
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
     "axios": "^0.19.0",
-    "babel-eslint": "10.0.2",
-    "babel-loader": "8.0.5",
-    "eslint": "^6.3.0",
+    "eslint": "^6.6.0",
     "eslint-config-react-app": "^5.0.1",
+    "eslint-plugin-react-hooks": "^2.0.1",
     "husky": "^2.4.1",
     "jetbridge-react-scripts": "latest",
     "lint-staged": "^8.1.7",
     "prettier": "^1.17.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "webpack": "^4.35.0"
+    "react-test-renderer": "^16.9.0"
   },
   "files": [
     "build"

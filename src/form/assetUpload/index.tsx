@@ -25,7 +25,7 @@ export interface IAssetUpload<MT = {}> {
   model?: MT
   uploadRequest: UploadRequestClass<MT>
   onBeforeUpload?: (file?: IFileDropzone) => Promise<MT | undefined> // should return model to proceed or false to abort upload
-  onUpdateComplete?: (args: UploadFileToS3Args<MT>) => void
+  onUploadComplete?: (args: UploadFileToS3Args<MT>) => void
   onError?: (error: Error) => void
   title?: string
   successTitleLabel?: string
@@ -52,7 +52,7 @@ function AssetUpload<MT = {}>({
   model,
   uploadRequest,
   onBeforeUpload,
-  onUpdateComplete,
+  onUploadComplete,
   onError,
   title,
   successTitleLabel = 'File Uploaded.',
@@ -85,9 +85,9 @@ function AssetUpload<MT = {}>({
 
   const handleUploadComplete = React.useCallback(
     (args: UploadFileToS3Args<MT>) => {
-      if (onUpdateComplete) onUpdateComplete(args)
+      if (onUploadComplete) onUploadComplete(args)
     },
-    [onUpdateComplete]
+    [onUploadComplete]
   )
 
   const canUpload = !!dropzone.file

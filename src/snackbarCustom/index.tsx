@@ -11,8 +11,8 @@ import classNames from 'classnames'
 
 const useStyles = makeStyles({
   base: {
-    display:'flex',
-    flexDirection: 'row'
+    display: 'flex',
+    flexDirection: 'row',
   },
   success: {
     backgroundColor: green[600],
@@ -106,7 +106,7 @@ const SnackbarCustom = (props: ISnackbar) => {
         </div>,
       ]}
     >
-      <CustomSnackbarContent {...props}/>
+      <CustomSnackbarContent {...props} />
     </Snackbar>
   )
 }
