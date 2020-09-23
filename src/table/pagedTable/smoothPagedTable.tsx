@@ -138,7 +138,6 @@ export function useSmoothPagedTable<T>(props: IUsePagedTableProps<T>) {
 
   // pagination controls callback
   const handleDidScrollToEnd = React.useCallback(() => {
-    console.log('handleDidScrollToEnd')
     loadAPI()
   }, [loadAPI])
 
