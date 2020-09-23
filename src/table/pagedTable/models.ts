@@ -1,7 +1,7 @@
 import { IPaginatedRequest, IPaginatedResponse } from '../../apiClient/paginated'
 
 export interface IPagedDataContext {
-  reloadData: () => void
+  reloadData: (onPage?: number) => void
 }
 
 export interface IPagedTableBaseProps<T> {

@@ -89,23 +89,24 @@ export function useSmoothPagedTable<T>(props: IUsePagedTableProps<T>) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
   // load data
-  const loadAPI = React.useCallback(async () => {
+  const loadAPI = React.useCallback(async (onPage?: number) => {
     // fetch data from paginated API
     try {
-      if (lastPage && page + 1 > lastPage) return
+      // used to refresh the current page to show the new values
+      const pageToLoad = onPage !== undefined ? onPage : page
+      if (lastPage && pageToLoad + 1 > lastPage) return
       setIsLoading(true)
       // TablePagination is zero-indexed, API is not
-      const res = await apiCall({ page: page + 1, pageSize, queryParams: queryParams })
-
+      const res = await apiCall({ page: pageToLoad + 1, pageSize, queryParams: queryParams })
       setRows(prev => ({
         ...prev,
-        [page]: res.rows,
+        [pageToLoad]: res.rows,
       }))
       setLastPage(res.last_page)
 
       // set newPage as current page
       // someone maybe scrolling like crazy so let's always remember last page
-
+      console.log('res.page', res.page)
       if (res.page) setPage(prevPage => Math.max(prevPage, res.page))
       else setPage(0)
     } catch (err) {
@@ -117,11 +118,13 @@ export function useSmoothPagedTable<T>(props: IUsePagedTableProps<T>) {
 
   // load on component mount
   React.useEffect(() => {
+    console.log('useEffect')
     if (autoLoad && !error) loadAPI()
   }, [autoLoad])
 
   // pagination controls callback
   const handleDidScrollToEnd = React.useCallback(() => {
+    console.log('handleDidScrollToEnd')
     loadAPI()
   }, [loadAPI])
 
