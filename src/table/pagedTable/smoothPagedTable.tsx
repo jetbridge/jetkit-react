@@ -133,7 +133,6 @@ export function useSmoothPagedTable<T>(props: IUsePagedTableProps<T>) {
 
   // load on component mount
   React.useEffect(() => {
-    console.log('useEffect')
     if (autoLoad && !error) loadAPI()
   }, [autoLoad])
 
