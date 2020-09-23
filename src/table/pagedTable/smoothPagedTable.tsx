@@ -89,24 +89,22 @@ export function useSmoothPagedTable<T>(props: IUsePagedTableProps<T>) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
   // load data
-  const loadAPI = React.useCallback(async (onPage?: number) => {
+  const loadAPI = React.useCallback(async () => {
     // fetch data from paginated API
     try {
       // used to refresh the current page to show the new values
-      const pageToLoad = onPage !== undefined ? onPage : page
-      if (lastPage && pageToLoad + 1 > lastPage) return
+      if (lastPage && page + 1 > lastPage) return
       setIsLoading(true)
       // TablePagination is zero-indexed, API is not
-      const res = await apiCall({ page: pageToLoad + 1, pageSize, queryParams: queryParams })
+      const res = await apiCall({ page: page + 1, pageSize, queryParams: queryParams })
       setRows(prev => ({
         ...prev,
-        [pageToLoad]: res.rows,
+        [page]: res.rows,
       }))
       setLastPage(res.last_page)
 
       // set newPage as current page
       // someone maybe scrolling like crazy so let's always remember last page
-      console.log('res.page', res.page)
       if (res.page) setPage(prevPage => Math.max(prevPage, res.page))
       else setPage(0)
     } catch (err) {
@@ -115,6 +113,23 @@ export function useSmoothPagedTable<T>(props: IUsePagedTableProps<T>) {
       setIsLoading(false)
     }
   }, [setLastPage, lastPage, apiCall, page, pageSize, queryParams, setIsLoading, setError])
+
+  const reloadFirstPage = React.useCallback(async() => {
+    try {
+      setIsLoading(true)
+      const res = await apiCall({ page: 1, pageSize, queryParams: queryParams })
+      setRows({
+        [1]: res.rows,
+      })
+      setLastPage(res.last_page)
+      if (res.page) setPage(res.page)
+      else setPage(1)
+    } catch (err) {
+      setError(err)
+    } finally {
+      setIsLoading(false)
+    }
+  }, [setLastPage, apiCall, setIsLoading, setRows, setPage])
 
   // load on component mount
   React.useEffect(() => {
@@ -136,6 +151,7 @@ export function useSmoothPagedTable<T>(props: IUsePagedTableProps<T>) {
     () => ({
       isLoading,
       reloadData: loadAPI,
+      reloadFirstPage,
       page,
       renderProps: {
         rows: Object.values(rows).reduce((acc, val) => acc.concat(val), []),
@@ -148,6 +164,6 @@ export function useSmoothPagedTable<T>(props: IUsePagedTableProps<T>) {
         pagedDataContext,
       },
     }),
-    [isLoading, loadAPI, rows, page, setPage, pageSize, setPageSize, handleDidScrollToEnd, pagedDataContext]
+    [isLoading, loadAPI, reloadFirstPage, rows, page, setPage, pageSize, setPageSize, handleDidScrollToEnd, pagedDataContext]
   )
 }

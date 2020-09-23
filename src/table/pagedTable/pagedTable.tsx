@@ -28,6 +28,7 @@ export interface IPagedTableProps<T> extends IDefaultPagedTableImpl<T>, IPagedTa
 // pass renderProps like: <PagedTable {...pagedTable.renderProps} />
 export interface IPagedTableHook<T> {
   reloadData: () => void
+  reloadFirstPage?: () => void
   isLoading: boolean
   renderProps: IDefaultPagedTableImpl<T>
   totalRows: number
