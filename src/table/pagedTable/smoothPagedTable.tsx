@@ -89,23 +89,28 @@ export function useSmoothPagedTable<T>(props: IUsePagedTableProps<T>) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
   // load data
-  const loadAPI = React.useCallback(async () => {
+  const loadAPI = React.useCallback(async (pageNumber?: number) => {
     // fetch data from paginated API
     try {
+      const pageToLoad = pageNumber || page
       // used to refresh the current page to show the new values
       if (lastPage && page + 1 > lastPage) return
       setIsLoading(true)
       // TablePagination is zero-indexed, API is not
-      const res = await apiCall({ page: page + 1, pageSize, queryParams: queryParams })
+      const res = await apiCall({ page: pageToLoad + 1, pageSize, queryParams: queryParams })
       setRows(prev => ({
         ...prev,
-        [page]: res.rows,
+        [pageToLoad]: res.rows,
       }))
       setLastPage(res.last_page)
-
+      // if pageNumber is provided, we are refreshing this page, so the current page
+      // has to be set to the page that we are refreshing
+      if (pageNumber) {
+        setPage(pageNumber)
+      }
       // set newPage as current page
       // someone maybe scrolling like crazy so let's always remember last page
-      if (res.page) setPage(prevPage => Math.max(prevPage, res.page))
+      else if (res.page) setPage(prevPage => Math.max(prevPage, res.page))
       else setPage(0)
     } catch (err) {
       setError(err)
@@ -115,20 +120,7 @@ export function useSmoothPagedTable<T>(props: IUsePagedTableProps<T>) {
   }, [setLastPage, lastPage, apiCall, page, pageSize, queryParams, setIsLoading, setError])
 
   const reloadFirstPage = React.useCallback(async() => {
-    try {
-      setIsLoading(true)
-      const res = await apiCall({ page: 1, pageSize, queryParams: queryParams })
-      setRows({
-        [1]: res.rows,
-      })
-      setLastPage(res.last_page)
-      if (res.page) setPage(res.page)
-      else setPage(1)
-    } catch (err) {
-      setError(err)
-    } finally {
-      setIsLoading(false)
-    }
+    loadAPI(0)
   }, [setLastPage, apiCall, setIsLoading, setRows, setPage])
 
   // load on component mount
