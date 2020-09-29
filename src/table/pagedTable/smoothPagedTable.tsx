@@ -89,24 +89,26 @@ export function useSmoothPagedTable<T>(props: IUsePagedTableProps<T>) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
   // load data
-  const loadAPI = React.useCallback(async () => {
+  const loadAPI = React.useCallback(async (pageNumber?: number) => {
     // fetch data from paginated API
     try {
+      const pageToLoad = pageNumber || page
+      // used to refresh the current page to show the new values
       if (lastPage && page + 1 > lastPage) return
       setIsLoading(true)
       // TablePagination is zero-indexed, API is not
-      const res = await apiCall({ page: page + 1, pageSize, queryParams: queryParams })
-
+      const res = await apiCall({ page: pageToLoad + 1, pageSize, queryParams: queryParams })
       setRows(prev => ({
         ...prev,
-        [page]: res.rows,
+        [pageToLoad]: res.rows,
       }))
       setLastPage(res.last_page)
-
+      // if pageNumber is provided, we are refreshing this page, so the current page
+      // has to be set to the page that we are refreshing
+      if (pageNumber) setPage(pageNumber)
       // set newPage as current page
       // someone maybe scrolling like crazy so let's always remember last page
-
-      if (res.page) setPage(prevPage => Math.max(prevPage, res.page))
+      else if (res.page) setPage(prevPage => Math.max(prevPage, res.page))
       else setPage(0)
     } catch (err) {
       setError(err)
@@ -114,6 +116,10 @@ export function useSmoothPagedTable<T>(props: IUsePagedTableProps<T>) {
       setIsLoading(false)
     }
   }, [setLastPage, lastPage, apiCall, page, pageSize, queryParams, setIsLoading, setError])
+
+  const reloadFirstPage = React.useCallback(async() => {
+    loadAPI(0)
+  }, [setLastPage, apiCall, setIsLoading, setRows, setPage])
 
   // load on component mount
   React.useEffect(() => {
@@ -133,6 +139,7 @@ export function useSmoothPagedTable<T>(props: IUsePagedTableProps<T>) {
     () => ({
       isLoading,
       reloadData: loadAPI,
+      reloadFirstPage,
       page,
       renderProps: {
         rows: Object.values(rows).reduce((acc, val) => acc.concat(val), []),
@@ -145,6 +152,6 @@ export function useSmoothPagedTable<T>(props: IUsePagedTableProps<T>) {
         pagedDataContext,
       },
     }),
-    [isLoading, loadAPI, rows, page, setPage, pageSize, setPageSize, handleDidScrollToEnd, pagedDataContext]
+    [isLoading, loadAPI, reloadFirstPage, rows, page, setPage, pageSize, setPageSize, handleDidScrollToEnd, pagedDataContext]
   )
 }
