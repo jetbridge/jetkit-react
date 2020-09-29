@@ -105,9 +105,7 @@ export function useSmoothPagedTable<T>(props: IUsePagedTableProps<T>) {
       setLastPage(res.last_page)
       // if pageNumber is provided, we are refreshing this page, so the current page
       // has to be set to the page that we are refreshing
-      if (pageNumber) {
-        setPage(pageNumber)
-      }
+      if (pageNumber) setPage(pageNumber)
       // set newPage as current page
       // someone maybe scrolling like crazy so let's always remember last page
       else if (res.page) setPage(prevPage => Math.max(prevPage, res.page))
