@@ -46,6 +46,7 @@ export const requestPaginated = <ResponseT>({ url, method = 'get', camelCase = f
   // pagination info lives in response header
 
   if (!response.headers['x-pagination']) {
+    console.error('No pagination header, make sure that endpoint is paginated check CORS settings')
     throw new Error('No pagination header, make sure that endpoint is paginated check CORS settings')
   }
   const pagination: Pagination = JSON.parse(response.headers['x-pagination'])
