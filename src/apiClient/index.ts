@@ -5,9 +5,12 @@ import { IAuthTokens, TokenRefreshRequest, refreshTokenIfNeeded as ajwtRefreshTo
 // https://facebook.github.io/create-react-app/docs/adding-custom-environment-variables
 const BASE_URL = process.env.REACT_APP_BASE_URL
 
+// https://nextjs.org/docs/basic-features/environment-variables#exposing-environment-variables-to-the-browser
+const NEXT_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
+
 export const apiClient = axios.create()
 apiClient.defaults.headers.common['Content-Type'] = 'application/json'
-apiClient.defaults.baseURL = BASE_URL
+apiClient.defaults.baseURL = BASE_URL ?? NEXT_BASE_URL
 
 // query params serializer for converting params name from ids[] to ids without square brackets
 const parseParams = (params: object) => {
@@ -59,11 +62,13 @@ export const setAuthTokensFromAuthResponse = async (res: IAuthResponse) => {
 
 export const requestRefresh: TokenRefreshRequest = async (refreshToken: string): Promise<string> => {
   // perform refresh
-  const res: IAuthResponse = (await axios.post(refreshEndpoint, null, {
-    headers: {
-      Authorization: `Bearer ${refreshToken}`,
-    },
-  })).data
+  const res: IAuthResponse = (
+    await axios.post(refreshEndpoint, null, {
+      headers: {
+        Authorization: `Bearer ${refreshToken}`,
+      },
+    })
+  ).data
   return res.access_token
 }
 
