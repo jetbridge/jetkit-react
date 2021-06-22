@@ -10,7 +10,7 @@ const NEXT_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 
 export const apiClient = axios.create()
 apiClient.defaults.headers.common['Content-Type'] = 'application/json'
-apiClient.defaults.baseURL = BASE_URL ?? NEXT_BASE_URL
+apiClient.defaults.baseURL = BASE_URL || NEXT_BASE_URL
 
 // query params serializer for converting params name from ids[] to ids without square brackets
 const parseParams = (params: object) => {
