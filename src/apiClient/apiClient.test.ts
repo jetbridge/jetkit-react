@@ -54,7 +54,7 @@ describe('BASE_URL env var is correctly loaded into apiClient.defaults.baseURL',
     expect(apiClient.defaults.baseURL).toEqual(baseUrlReact)
   })
 
-  test('Is none of the env vars are present, baseURL should be undefined', () => {
+  test('If none of the env vars are present, baseURL should be undefined', () => {
     // act
     const apiClient = loadApiClient()
 
