@@ -25,8 +25,8 @@ export abstract class UploadRequest<MT = {}> {
    * @param file File object to upload.
    * @param model Optional instance of related model that this asset is associated with.
    */
-  protected abstract async prepareUploadRequest(file: File, model?: MT): Promise<PrepareUploadResponse>
-  protected abstract async prepareUploadRequest(file: File): Promise<PrepareUploadResponse>
+  protected abstract prepareUploadRequest(file: File, model?: MT): Promise<PrepareUploadResponse>
+  protected abstract prepareUploadRequest(file: File): Promise<PrepareUploadResponse>
 
   public model?: MT
   public file: File
