@@ -17,6 +17,11 @@ To configure your project to use an API client that is compatible with a JetKit 
 REACT_APP_BASE_URL=http://localhost:5000/api
 ```
 
+Alternatively, if you're using NEXT JS, you could use its native [public env variable](https://nextjs.org/docs/basic-features/environment-variables#exposing-environment-variables-to-the-browser), naming the variable as follows:
+```
+NEXT_PUBLIC_BASE_URL=http://localhost:5000/api
+```
+
 ## Hacking
 
 It is suggested to use the project and storybook from the [component-library](component-library) directory to mock and develop components against.

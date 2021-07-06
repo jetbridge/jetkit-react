@@ -11,7 +11,7 @@ import Visibility from '@material-ui/icons/Visibility'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import FormControl from '@material-ui/core/FormControl'
 import { createStyles, withStyles, WithStyles } from '@material-ui/core/styles'
-import { ThemeStyle } from '@material-ui/core/styles/createTypography'
+import { Variant } from '@material-ui/core/styles/createTypography'
 
 const styles = createStyles({
   root: {
@@ -66,7 +66,7 @@ interface ILoginScreenProps extends WithStyles<typeof styles> {
   passwordError?: boolean
   passwordHelperText?: string
   submitButtonProps?: ButtonProps
-  titleVariant?: ThemeStyle
+  titleVariant?: Variant
   onSubmitClick(): void
 }
 

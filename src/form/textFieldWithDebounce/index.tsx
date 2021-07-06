@@ -28,7 +28,7 @@ const TextFieldWithDebounce: React.FC<ITextFieldWIthDebounce> = textFieldProps =
     }
   }, [initialValueSet, value])
 
-  const [debouncedCallback] = useDebouncedCallback(
+  const debouncedCallback = useDebouncedCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       onChange(event)
     },

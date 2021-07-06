@@ -1,5 +1,5 @@
 import apiClient from '.'
-import * as camelcaseKeys from 'camelcase-keys'
+import camelcaseKeys from 'camelcase-keys'
 
 export interface IAPIDescriptor {
   method?: 'get' | 'post' | 'put' | 'patch' | 'delete' | 'trace' | 'options' | 'head'

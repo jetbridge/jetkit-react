@@ -2,7 +2,7 @@ import { renderHook, act } from '@testing-library/react-hooks'
 import { useEventual } from './index'
 
 const mockPromise = <T>() => {
-  let resolve: ((value: T | PromiseLike<T>) => void) | null = () => {}
+  let resolve: ((value: T | PromiseLike<T>) => void) | null = () => undefined
   const promise = new Promise<T>(_resolve => {
     resolve = _resolve
   })
