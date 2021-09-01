@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/jetbridge/jetkit-react.svg?style=svg)](https://circleci.com/gh/jetbridge/jetkit-react)
+[![Build and test](https://github.com/jetbridge/jetkit-react/actions/workflows/reactApp.yml/badge.svg)](https://github.com/jetbridge/jetkit-react/actions/workflows/reactApp.yml)
 
 # JetKit 🚀
 
